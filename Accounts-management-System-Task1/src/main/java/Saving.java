@@ -5,7 +5,7 @@ public class Saving extends Accounts {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Saving(int A, int num) {
+	public Saving(int A, String num) {
 		super(A, num);
 		// TODO Auto-generated constructor stub
 	}

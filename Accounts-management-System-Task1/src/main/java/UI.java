@@ -1,6 +1,6 @@
-import java.rmi.server.Operation;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.UUID;
 
 public class UI {
 	
@@ -122,16 +122,70 @@ public class UI {
 		System.out.println("Press Y for Saving");
 		char AccT=i1.next().charAt(0);
 		if(AccT=='X'||AccT=='x') {
-			a.add(new Checking(AccT,unique1));
+			String uniqueID = UUID.randomUUID().toString();
+			//System.out.println(uniqueID);
+			a.add(new Checking(AccT,uniqueID));
+			
+			System.out.println("Account successfully Created\n"+"Your Account ID is: "+uniqueID+"\n Remember this ID to Access your account and keep it secure\n");
 			Operations(unique1,AccT);
+			unique1++;
 		}
 		else if(AccT=='Y'||AccT=='y') {
-			s.add(new Saving(AccT,unique2));
+			String uniqueID = UUID.randomUUID().toString();
+			System.out.println(uniqueID);
+			s.add(new Saving(AccT,uniqueID));
 			Operations(unique2,AccT);
+			unique2++;
 		}
 		//System.out.println("Enter Account Number");
 		//int accNum=i1.nextInt();
 		//a.add(new Accounts(AccT,unique));
+	}
+	//--------------------------------------------------------------------------------------------------------------------------------
+	//---------------------------------				LOGIN				--------------------------------------------------------------
+	//--------------------------------------------------------------------------------------------------------------------------------
+	public void Login() {
+		int index=0;
+		Scanner i1=new Scanner(System.in);
+		System.out.println("Select your Account Type");
+		System.out.println("Press X for Checking Account");
+		System.out.println("Press Y for Saving Account");
+		char AccT=i1.next().charAt(0);
+		Checking logged;
+		//Checking logged;
+		if(AccT=='X') {
+			Scanner i9=new Scanner(System.in);
+			System.out.println("Enter your Account number");
+			String u_res=i9.next();
+			for(int i=0;i<a.size();i++) {
+				logged=(Checking)a.get(i);
+				//ASystem.out.println(logged.Acc_no+" |");
+				//System.out.println(u_res+" |");
+				if(u_res.equals(logged.Acc_no)) {
+					//System.out.println("llllllllllllllllllllllllll");
+					index=i;
+					break;
+				}
+			}
+		//logged=(Checking)a.get(index);	
+		}
+		else if(AccT=='Y') {
+			System.out.println("Enter your Account number");
+			String u_res=i1.next();
+			for(int i=0;i<a.size();i++) {
+				Saving b=(Saving)s.get(i);
+				if(u_res.equals(b.Acc_no)) {
+					index=i;
+					break;
+				}
+			}
+		//logged=(Checking)a.get(index);
+		}
+		System.out.println("Index is :"+index);
+		Operations(index,AccT);
+		
+		
+		
 	}
 	
 	
@@ -152,19 +206,26 @@ public class UI {
 	
 	public static void main(String[] args) {
 		//------------------------------------------------------------
+
 		UI interface1=new UI();
 		int id=0;//unique identifier for new comers
 		char option='z';//To make menu
 		//------------------------------------------------------------
+		System.out.println("Welcome to bank account management system");
 		while(option!='e'||option!='E') {
 		Scanner i1=new Scanner(System.in);
 		System.out.println("Select the Options below to proceed");
+		System.out.println("Press (A) to sign up");
+		System.out.println("Press (B) to sign in");
 		option=i1.next().charAt(0);
 		if(option=='a'||option=='A')
 		interface1.SignUp();
 		
 		//interface1.Show(id);
 		id++;
+		if(option=='b'||option=='B') {
+			interface1.Login();
+		}
 		// TODO Auto-generated method stub
 		}
 	}

@@ -9,7 +9,7 @@ import java.util.Scanner;
  *
  */
 public class Accounts {
-	private int Acc_no;
+	protected String Acc_no;
 	protected int account_balance;
 	private int date_created;
 
@@ -17,12 +17,12 @@ public class Accounts {
 	 * 
 	 */
 	public Accounts() {
-		Acc_no=0;
+		Acc_no="0";
 		account_balance=100;
 		date_created=12;
 		// TODO Auto-generated constructor stub
 	}
-	public Accounts(int A,int num) {
+	public Accounts(int A,String num) {
 		Acc_no=num;
 		account_balance=100;
 		date_created=12;
@@ -37,6 +37,7 @@ public class Accounts {
 	//--------------------------------------------------------------------------
 	public void checkBalance() {
 		//System.out.println("Your assigned Account Number and Account type is: ");
+		System.out.println("Account ID: "+Acc_no);
 		System.out.println("Your account balance is: ");
 		System.out.println(account_balance);
 	}

@@ -9,7 +9,7 @@ public class Checking extends Accounts {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Checking(int A, int num) {
+	public Checking(int A, String num) {
 		super(A, num);
 		free_count=2;
 		fee=10;
