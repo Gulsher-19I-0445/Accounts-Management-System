@@ -50,7 +50,10 @@ public class UI {
 					}
 				
 				if(opt=='B'||opt=='b') {
-					
+					int am;
+					Scanner i2=new Scanner(System.in);
+					am=i2.nextInt();
+					b.withdraw(am);
 				}
 				
 				if(opt=='C'||opt=='c') {

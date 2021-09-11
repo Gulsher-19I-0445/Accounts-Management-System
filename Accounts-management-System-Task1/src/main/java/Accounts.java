@@ -10,7 +10,7 @@ import java.util.Scanner;
  */
 public class Accounts {
 	private int Acc_no;
-	private int account_balance;
+	protected int account_balance;
 	private int date_created;
 
 	/**
@@ -54,9 +54,7 @@ public class Accounts {
 	//--------------------------------------------------------------------------
 	//--------------------------------WithDraw----------------------------------
 	//--------------------------------------------------------------------------
-	public void withDraw() {
-		
-	}
+	
 	
 	
 	
