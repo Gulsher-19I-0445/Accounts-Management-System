@@ -5,10 +5,16 @@ public class Saving extends Accounts {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Saving(int A, String num) {
-		super(A, num);
+	public Saving(char A, String num,String name) {
+		super(A, num,name);
 		// TODO Auto-generated constructor stub
 	}
+	
+	public Saving(char A, String num,String name,String date) {
+		super(A, num,name,date);
+		// TODO Auto-generated constructor stub
+	}
+	
 	//--------------------------------------------------------
 	//-----------------WithDraw-------------------------------
 	

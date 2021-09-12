@@ -1,3 +1,7 @@
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.UUID;
@@ -19,12 +23,41 @@ public class UI {
 	//----------------------------------------------------------------
 	//----------------------Constructor--------------------------------
 	//-----------------------------------------------------------------
-	public UI() {
+	public UI() throws FileNotFoundException, IOException {
 		//a.add(new Accounts());
 		//System.out.println("Hello");
 		unique1=0;
 		unique2=0;
+
 		// TODO Auto-generated constructor stub
+	}
+	
+	public void  UIRead() throws FileNotFoundException, IOException {
+		try (BufferedReader br = new BufferedReader(new FileReader("new.csv"))) {
+
+		    // List to collect Employee objects
+		   // List<Employee> employees = new ArrayList<Employee>();
+			int i=0;
+		    // Read file line by line
+		    String line = "";
+		    while ((line = br.readLine()) != null) {
+		       // Parse line to extract individual fields
+		    	System.out.println("lol");
+		       String[] data ;
+		    	data=line.split(",");
+		    	if(i>0) {
+		       // Create new Employee object
+		    	//if(data[2])
+		       a.add(new Checking(Integer.valueOf(data[2]),data[0],data[1],data[3]));
+		       //Checking employee = new Checking();
+		    	}
+		    	i++;
+		       // Add object to list
+		       //employees.add(employee);
+		    }
+
+		    // Further process your Employee objects...
+		}
 	}
 	
 	//----------------------------------------------------------------
@@ -116,6 +149,9 @@ public class UI {
 	//----------------------Sign Up-----------------------------------
 	//--------------------Create Account------------------------------
 	public void SignUp() {			//Create Account Module
+		Scanner i5=new Scanner(System.in);
+		System.out.println("Please enter your name");
+		String name=i5.next();
 		Scanner i1=new Scanner(System.in);
 		System.out.println("Select Account type");
 		System.out.println("Press X for Checking");
@@ -124,7 +160,7 @@ public class UI {
 		if(AccT=='X'||AccT=='x') {
 			String uniqueID = UUID.randomUUID().toString();
 			//System.out.println(uniqueID);
-			a.add(new Checking(AccT,uniqueID));
+			a.add(new Checking(AccT,uniqueID,name));
 			
 			System.out.println("Account successfully Created\n"+"Your Account ID is: "+uniqueID+"\n Remember this ID to Access your account and keep it secure\n");
 			Operations(unique1,AccT);
@@ -133,7 +169,7 @@ public class UI {
 		else if(AccT=='Y'||AccT=='y') {
 			String uniqueID = UUID.randomUUID().toString();
 			System.out.println(uniqueID);
-			s.add(new Saving(AccT,uniqueID));
+			s.add(new Saving(AccT,uniqueID,name));
 			Operations(unique2,AccT);
 			unique2++;
 		}
@@ -205,10 +241,11 @@ public class UI {
 	//----------------------Int Main----------------------------------
 	//----------------------------------------------------------------
 	
-	public static void main(String[] args) {
+	public static void main(String[] args) throws FileNotFoundException, IOException {
 		//------------------------------------------------------------
 
 		UI interface1=new UI();
+		interface1.UIRead();
 		int id=0;//unique identifier for new comers
 		char option='z';//To make menu
 		//------------------------------------------------------------

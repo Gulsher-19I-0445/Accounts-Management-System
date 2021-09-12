@@ -9,12 +9,20 @@ public class Checking extends Accounts {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Checking(int A, String num) {
-		super(A, num);
+	public Checking(char A, String num,String name) {
+		super(A, num,name);
 		free_count=2;
 		fee=10;
 		// TODO Auto-generated constructor stub
 	}
+	//-----------------------------------------------------------------
+	public Checking(char A, String num,String name,String date) {
+		super(A, num,name,date);
+		free_count=2;
+		fee=10;
+		// TODO Auto-generated constructor stub
+	}
+	
 	//-----------------------------------------------------------------
 	//-------------------Withdraw Checking-----------------------------
 	//-----------------------------------------------------------------
