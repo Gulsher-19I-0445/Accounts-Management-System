@@ -38,6 +38,7 @@ public class UI {
 		    // List to collect Employee objects
 		   // List<Employee> employees = new ArrayList<Employee>();
 			int i=0;
+			char temp1='0';
 		    // Read file line by line
 		    String line = "";
 		    while ((line = br.readLine()) != null) {
@@ -48,7 +49,13 @@ public class UI {
 		    	if(i>0) {
 		       // Create new Employee object
 		    	//if(data[2])
-		       a.add(new Checking(Integer.valueOf(data[2]),data[0],data[1],data[3]));
+		    	if(data[4].equals("Checking")) {
+		    		temp1='X';
+		    	}
+		    	else if(data[4].equals("Saving")) {
+		    		temp1='Y';
+		    	}
+		       a.add(new Checking(temp1,data[0],data[1],Integer.valueOf(data[2]),data[3]));
 		       //Checking employee = new Checking();
 		    	}
 		    	i++;

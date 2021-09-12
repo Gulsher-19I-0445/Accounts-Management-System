@@ -16,8 +16,8 @@ public class Checking extends Accounts {
 		// TODO Auto-generated constructor stub
 	}
 	//-----------------------------------------------------------------
-	public Checking(char A, String num,String name,String date) {
-		super(A, num,name,date);
+	public Checking(char A, String num,String name,int b,String date) {
+		super(A, num,name,b,date);
 		free_count=2;
 		fee=10;
 		// TODO Auto-generated constructor stub

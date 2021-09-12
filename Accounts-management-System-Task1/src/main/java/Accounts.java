@@ -1,5 +1,6 @@
 import java.io.FileWriter;
 import java.io.IOException;
+import java.sql.Date;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
@@ -14,6 +15,7 @@ import java.util.Scanner;
  */
 public class Accounts {
 	protected String Acc_no;
+	private char account_typ;
 	protected int account_balance;
 	private String date_created;
 	private String name;
@@ -33,6 +35,7 @@ public class Accounts {
 		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");  
 		LocalDateTime now = LocalDateTime.now();  
 		name=name1;
+		account_typ=A;
 		System.out.println("Account created on "+dtf.format(now));
 		date_created=dtf.format(now);
 		try {
@@ -44,13 +47,14 @@ public class Accounts {
 		// TODO Auto-generated constructor stub
 	}
 	//--------------------------------------------------------------------
-	public Accounts(char A,String num,String name1,String date) {
+	public Accounts(char A,String num,String name1,int balance,String date) {
 		Acc_no=num;
-		account_balance=100;
-		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");  
-		LocalDateTime now = LocalDateTime.now();  
+		account_balance=balance;
+		//DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");  
+		//LocalDateTime now = LocalDateTime.now();  
 		name=name1;
-		System.out.println("Account created on "+dtf.format(now));
+		account_typ=A;
+		//System.out.println("Account created on "+dtf.format(now));
 		date_created=date;
 		// TODO Auto-generated constructor stub
 	}
@@ -111,7 +115,9 @@ public class Accounts {
 		br.write(sb.toString());
 		br.close();*/
 	
-
+		String temp="";
+		//Date dt1;
+		//Date dt1=date_created;
 		FileWriter csvWriter = new FileWriter("new.csv",true);
 				
 		csvWriter.append(Acc_no);
@@ -122,6 +128,14 @@ public class Accounts {
 		csvWriter.append(s);
 		csvWriter.append(",");
 		csvWriter.append(date_created);
+		csvWriter.append(",");
+		if(account_typ=='X'||account_typ=='x') {
+			temp="Checking";
+		}
+		else if(account_typ=='Y'||account_typ=='y') {
+			temp="Saving";
+		}
+		csvWriter.append(temp);
 		csvWriter.append(",");
 		csvWriter.append("\n");
 		

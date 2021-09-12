@@ -10,8 +10,8 @@ public class Saving extends Accounts {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public Saving(char A, String num,String name,String date) {
-		super(A, num,name,date);
+	public Saving(char A, String num,String name,int b,String date) {
+		super(A, num,name,b,date);
 		// TODO Auto-generated constructor stub
 	}
 	
