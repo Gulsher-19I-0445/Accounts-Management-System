@@ -152,6 +152,7 @@ public class UI {
 		System.out.println("Press Y for Saving Account");
 		char AccT=i1.next().charAt(0);
 		Checking logged;
+		Saving logged1;
 		//Checking logged;
 		if(AccT=='X') {
 			Scanner i9=new Scanner(System.in);
@@ -172,9 +173,9 @@ public class UI {
 		else if(AccT=='Y') {
 			System.out.println("Enter your Account number");
 			String u_res=i1.next();
-			for(int i=0;i<a.size();i++) {
-				Saving b=(Saving)s.get(i);
-				if(u_res.equals(b.Acc_no)) {
+			for(int i=0;i<s.size();i++) {
+				logged1=(Saving)s.get(i);
+				if(u_res.equals(logged1.Acc_no)) {
 					index=i;
 					break;
 				}
