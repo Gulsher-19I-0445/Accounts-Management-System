@@ -21,6 +21,7 @@ public class Accounts {
 	private int transactions[];
 	private String tdate[];
 	private int countT;
+	private String msg;
 
 	/**
 	 * 
@@ -120,6 +121,13 @@ public class Accounts {
 			k=k%10;
 		}
 		tdate[k]=t;
+	}
+	//--------------------------------------------------------------------------
+	public String getMsg() {
+		return msg;
+	}
+	public void setMsg(String m) {
+		msg=m;
 	}
 	
 	
@@ -247,11 +255,35 @@ public class Accounts {
 			//}
 		}
 		
+		System.out.println(msg);
 		
 	}
 	
-
-	
+	public void transfer(Checking k) {
+		System.out.println("Account "+k.getAccNum()+" found");
+		System.out.println("Enter the amount of money you want to deposit");
+		Scanner i1=new Scanner(System.in);
+		int am=i1.nextInt();
+		account_balance=account_balance-am;
+		int newB=k.getBalance()+am;
+		k.setBalance(newB);
+	//logged=(Checking)a.get(index);	
+	}
+	public void transfer(Saving k) {
+		System.out.println("Account "+k.getAccNum()+" found");
+		System.out.println("Enter the amount of money you want to deposit");
+		Scanner i1=new Scanner(System.in);
+		int am=i1.nextInt();
+		account_balance=account_balance-am;
+		int newB=k.getBalance()+am;
+		k.setBalance(newB);
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");  
+		LocalDateTime now = LocalDateTime.now();
+		System.out.println("An amount of Rs "+am+" was deposited into account "+k.getAccNum()+" owned by "+k.getName()+" on "+dtf.format(now));
+		k.setMsg("An amount of Rs "+am+" was deposited into your account by account number "+Acc_no+" owned by "+name+" on "+dtf.format(now));
+		
+	//logged=(Checking)a.get(index);	
+	}
 	
 	
 	//--------------------------------------------------------------------------

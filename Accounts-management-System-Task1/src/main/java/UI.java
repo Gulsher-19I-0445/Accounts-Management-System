@@ -90,10 +90,20 @@ public class UI {
 				System.out.println("(C)Check Balance");
 				System.out.println("(D)PrintStatement");
 				System.out.println("(E)Transfer Money");
-				System.out.println("(F)Calculate Zakat");
-				System.out.println("(G)Display all deductions");
+				//System.out.println("(F)Calculate Zakat");
+				//System.out.println("(G)Display all deductions");
 				Scanner i1=new Scanner(System.in);
 				opt=i1.next().charAt(0);
+				/*while(opt!='A'||opt!='a'||opt!='B'||opt!='b'||opt!='C'||opt!='c'||opt!='D'||opt!='d'||opt!='E'||opt!='e'||opt!='F'||opt!='f'||opt!='G'||opt!='g') {
+					//if(x>0) {
+						//Scanner i1=new Scanner(System.in);
+						System.out.println("Please select a valid option");
+						//x++;
+					//}
+					i1=new Scanner(System.in);
+					opt=i1.next().charAt(0);
+					}*/
+				
 				if(opt=='A'||opt=='a') {
 					b.makeDeposit();
 					if(b.free_count==0) {
@@ -117,6 +127,9 @@ public class UI {
 				if(opt=='D'||opt=='d') {
 					b.PrintStatemet();
 					}
+				if(opt=='E'||opt=='e') {
+					TransferTo(b);
+					}
 				
 			}
 			//-----------------------------
@@ -134,9 +147,18 @@ public class UI {
 				System.out.println("(D)PrintStatement");
 				System.out.println("(E)Transfer Money");
 				System.out.println("(F)Calculate Zakat");
-				System.out.println("(G)Display all deductions");
+				//System.out.println("(G)Display all deductions");
 				Scanner i1=new Scanner(System.in);
 				opt=i1.next().charAt(0);
+				/*while(opt!='A'||opt!='a'||opt!='B'||opt!='b'||opt!='C'||opt!='c'||opt!='D'||opt!='d'||opt!='E'||opt!='e'||opt!='F'||opt!='f'||opt!='G'||opt!='g') {
+					//if(x>0) {
+						//Scanner i1=new Scanner(System.in);
+						System.out.println("Please select a valid option");
+						//x++;
+					//}
+					i1=new Scanner(System.in);
+					opt=i1.next().charAt(0);
+					}*/
 				if(opt=='A'||opt=='a') {
 					c.makeDeposit();
 					//if(b.free_count==0) {
@@ -161,6 +183,11 @@ public class UI {
 				if(opt=='D'||opt=='d') {
 					c.PrintStatemet();
 				}
+				
+				if(opt=='E'||opt=='e') {
+					TransferTo(c);
+				}
+				
 				if(opt=='F'||opt=='f') {
 					c.ZakatCalc();
 				}
@@ -187,6 +214,15 @@ public class UI {
 		System.out.println("Press X for Checking");
 		System.out.println("Press Y for Saving");
 		char AccT=i1.next().charAt(0);
+		/*while(AccT!='X'||AccT!='x'||AccT!='Y'||AccT!='y') {
+			//if(x>0) {
+				//Scanner i1=new Scanner(System.in);
+				System.out.println("Please Enter a Valid ammount");
+				//x++;
+			//}
+			i1=new Scanner(System.in);
+			AccT=i1.next().charAt(0);
+			}*/
 		if(AccT=='X'||AccT=='x') {
 			String uniqueID = UUID.randomUUID().toString();
 			//System.out.println(uniqueID);
@@ -200,6 +236,7 @@ public class UI {
 			String uniqueID = UUID.randomUUID().toString();
 			System.out.println(uniqueID);
 			s.add(new Saving(AccT,uniqueID,name));
+			System.out.println("Account successfully Created\n"+"Your Account ID is: "+uniqueID+"\n Remember this ID to Access your account and keep it secure\n");
 			Operations(unique2,AccT);
 			unique2++;
 		}
@@ -248,7 +285,7 @@ public class UI {
 			}
 		//logged=(Checking)a.get(index);
 		}
-		System.out.println("Index is :"+index);
+		//System.out.println("Index is :"+index);
 		//System.out.println("Welcome "+getName());
 		Operations(index,AccT);
 		
@@ -267,6 +304,108 @@ public class UI {
 		//aChecking b=(Checking)a.get(n);
 		//b.Display();
 	}
+	
+	//----------------------------------------------------------------
+	
+	public void TransferTo(Checking c1) {
+		int check=2;		//1 for checjing and 2 for saving
+		String num=" ";		//Account number
+		int index=0;
+		int i=0;
+		int j=0;
+		System.out.println("Enter the account number of the account you want to transfer money to");
+		Scanner i1=new Scanner(System.in);
+		num=i1.next();
+		Checking logged;
+		Saving logged1;
+		for(i=0;i<a.size();i++) {
+			
+			logged=(Checking)a.get(i);
+			//ASystem.out.println(logged.Acc_no+" |");
+			//System.out.println(u_res+" |");
+			if(num.equals(logged.getAccNum())) {
+				//System.out.println("llllllllllllllllllllllllll");
+				index=i;
+				check=1;
+				break;
+			}
+			
+			
+			
+		}
+		for(j=0;j<s.size();j++) {
+			logged1=(Saving)s.get(i);
+			if(num.equals(logged1.getAccNum())) {
+				//System.out.println("llllllllllllllllllllllllll");
+				index=i;
+				check=0;
+				break;
+			}
+		}
+		if(index==a.size()) {
+			System.out.println("This account does not exits");
+		}
+		else {
+			if(check==1) {
+			logged=(Checking)a.get(index);
+			c1.transfer(logged);
+			}
+			else if(check==0) {
+			logged1=(Saving)s.get(index);
+			c1.transfer(logged1);
+			}
+			
+		}
+	}
+	//----------------------------------------------------------------
+	public void TransferTo(Saving s1) {
+		int check=2;		//1 for checjing and 2 for saving
+		String num=" ";		//Account number
+		int index=0;
+		int i=0;
+		System.out.println("Enter the account number of the account you want to transfer money to");
+		Scanner i1=new Scanner(System.in);
+		num=i1.next();
+		Checking logged;
+		Saving logged1;
+		for(i=0;i<a.size();i++) {
+			
+			logged=(Checking)a.get(i);
+			logged1=(Saving)s.get(i);
+			//ASystem.out.println(logged.Acc_no+" |");
+			//System.out.println(u_res+" |");
+			if(num.equals(logged.getAccNum())) {
+				//System.out.println("llllllllllllllllllllllllll");
+				index=i;
+				check=1;
+				break;
+			}
+			
+			
+			else if(num.equals(logged1.getAccNum())) {
+				System.out.println("llllllllllllllllllllllllll");
+				index=i;
+				check=0;
+				break;
+			}
+			
+		}
+		if(index==a.size()) {
+			System.out.println("This account does not exits");
+		}
+		else {
+			if(check==1) {
+			logged=(Checking)a.get(index);
+			s1.transfer(logged);
+			}
+			else if(check==0) {
+			logged1=(Saving)s.get(index);
+			s1.transfer(logged1);
+			}
+			
+		}
+	}
+	
 	
 	//----------------------------------------------------------------
 	//----------------------Int Main----------------------------------
