@@ -1,6 +1,5 @@
 import java.io.FileWriter;
 import java.io.IOException;
-import java.sql.Date;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
@@ -19,6 +18,9 @@ public class Accounts {
 	private int account_balance;
 	private String date_created;
 	private String name;
+	private int transactions[];
+	private String tdate[];
+	private int countT;
 
 	/**
 	 * 
@@ -38,6 +40,15 @@ public class Accounts {
 		account_typ=A;
 		System.out.println("Account created on "+dtf.format(now));
 		date_created=dtf.format(now);
+		transactions=new int[10];
+		tdate=new String[10];
+		for(int i=0;i<10;i++) {
+			transactions[i]=0;
+		}
+		for(int i=0;i<10;i++) {
+			tdate[i]="";
+		}
+		countT=0;
 		/*try {
 			write_to();
 		} catch (IOException e) {
@@ -88,6 +99,28 @@ public class Accounts {
 	public int getBalance() {
 		return account_balance;
 	}
+	//---------------------------------------------------------------------------
+	public int getT(int k){
+		
+		return transactions[k];
+	}
+	public void setT(int k,int t){	//k is index and t is the amount
+		if(k>10) {
+			k=k%10;
+		}
+		transactions[k]=t;
+	}
+	//--------------------------------------------------------------------------
+	public String getd(int k){
+		
+		return tdate[k];
+	}
+	public void setd(int k,String t){	//k is index and t is the amount
+		if(k>10) {
+			k=k%10;
+		}
+		tdate[k]=t;
+	}
 	
 	
 	
@@ -107,11 +140,31 @@ public class Accounts {
 	//--------------------------------------------------------------------------
 	
 	public void makeDeposit() {
+		int amt=-1;
+		int x=0;
+		Scanner i1;
 		System.out.println("Enter the amount to Deposit");
-		Scanner i1=new Scanner(System.in);
-		int amt=i1.nextInt();
+		i1=new Scanner(System.in);
+		amt=i1.nextInt();
+		while(amt<0) {
+		//if(x>0) {
+			//Scanner i1=new Scanner(System.in);
+			System.out.println("Please Enter a Valid ammount");
+			//x++;
+		//}
+		i1=new Scanner(System.in);
+		amt=i1.nextInt();
+		}
 		account_balance=account_balance+amt;
 		System.out.print("Rs"+amt+" added to your balance");
+		//int temp1=0;
+		setT(countT,amt);
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");  
+		LocalDateTime now = LocalDateTime.now();
+		setd(countT,dtf.format(now));
+		countT++;
+		
+		
 	}
 	//--------------------------------------------------------------------------
 	//--------------------------------WithDraw----------------------------------
@@ -162,7 +215,40 @@ public class Accounts {
 		  
 		
 	}
-	
+	public void PrintStatemet() {
+		String temp=" ";
+		System.out.println("Generating statement for"+Acc_no);
+		System.out.println("Owner Name: "+name);
+		System.out.println("Account Number: "+Acc_no);
+		System.out.println("Current Balance: Rs"+account_balance);
+		if(account_typ=='X'||account_typ=='x') {
+			temp="Checking";
+		}
+		else if(account_typ=='Y'||account_typ=='y') {
+			temp="Saving";
+		}
+		System.out.println("Account Type is "+temp);
+		System.out.println("Account was created on "+date_created);
+		System.out.println("Generating details of past 9 transactions made....");
+		
+		for(int i=0;i<10;i++) {
+			int x=0;
+			String y=" ";
+			x=getT(i);
+			y=getd(i);
+			
+			//if(x!=0) {
+				if(x>0) {
+					System.out.println("Rs"+x+" were deposited in you Account on "+y);
+				}
+				else if(x<0) {
+					System.out.println("Rs"+x+" were withdrawn from you Account"+y);
+				}
+			//}
+		}
+		
+		
+	}
 	
 
 	

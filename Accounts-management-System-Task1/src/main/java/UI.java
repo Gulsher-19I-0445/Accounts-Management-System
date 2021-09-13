@@ -114,6 +114,9 @@ public class UI {
 				if(opt=='C'||opt=='c') {
 				b.checkBalance();
 				}
+				if(opt=='D'||opt=='d') {
+					b.PrintStatemet();
+					}
 				
 			}
 			//-----------------------------
@@ -153,6 +156,13 @@ public class UI {
 				
 				if(opt=='C'||opt=='c') {
 				c.checkBalance();
+				}
+				
+				if(opt=='D'||opt=='d') {
+					c.PrintStatemet();
+				}
+				if(opt=='F'||opt=='f') {
+					c.ZakatCalc();
 				}
 				
 				

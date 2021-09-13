@@ -1,6 +1,9 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Saving extends Accounts {
-	
+	private int cTr;
+	private double zakat;
 	public Saving() {
 		// TODO Auto-generated constructor stub
 	}
@@ -12,6 +15,7 @@ public class Saving extends Accounts {
 	
 	public Saving(char A, String num,String name,int b,String date) {
 		super(A, num,name,b,date);
+		cTr=0;
 		// TODO Auto-generated constructor stub
 	}
 	
@@ -26,6 +30,24 @@ public class Saving extends Accounts {
 		}
 		else {
 			setBalance(getBalance()-amt);
+		
+		
+		int temp2=0;
+		temp2=amt*(-1);
+		setT(cTr,temp2);
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");  
+		LocalDateTime now = LocalDateTime.now();
+		setd(cTr,dtf.format(now));
+		cTr++;
+		}
+	}
+	public void ZakatCalc() {
+		if(getBalance()>20000) {
+			zakat=(getBalance()*2.5)/100;
+			System.out.println("Rs "+zakat+" will be deducted from your account");
+		}
+		else{
+			System.out.println("Zakat is not applicable on your Account");
 		}
 	}
 	
