@@ -72,10 +72,18 @@ public class UI {
 		//----------------------------------------------------------------
 		public void Operations(int i,char atyp) {
 			//Checking b=;
+			int c1=0;
+			//Checking b=(Checking)a.get(i);
+			
 			char opt='M';
 			while(opt!='0') {
 			if(atyp=='X'||atyp=='x') {
 				Checking b=(Checking)a.get(i);
+				if(c1==0) {
+					System.out.println("Welcome "+b.getName());
+					c1++;
+				}
+				
 				System.out.println("Select what you want to do");
 				System.out.println("(A) Deposit Money");
 				System.out.println("(B) Withdraw Money");
@@ -111,6 +119,11 @@ public class UI {
 			//-----------------------------
 			if(atyp=='Y'||atyp=='y') {
 				Saving c=(Saving)s.get(i);
+				if(c1==0) {
+					System.out.println("Welcome "+c.getName());
+					c1++;
+				}
+				c1++;
 				System.out.println("Select what you want to do");
 				System.out.println("(A) Deposit Money");
 				System.out.println("(B) Withdraw Money");
@@ -205,7 +218,7 @@ public class UI {
 				logged=(Checking)a.get(i);
 				//ASystem.out.println(logged.Acc_no+" |");
 				//System.out.println(u_res+" |");
-				if(u_res.equals(logged.Acc_no)) {
+				if(u_res.equals(logged.getAccNum())) {
 					//System.out.println("llllllllllllllllllllllllll");
 					index=i;
 					break;
@@ -218,7 +231,7 @@ public class UI {
 			String u_res=i1.next();
 			for(int i=0;i<s.size();i++) {
 				logged1=(Saving)s.get(i);
-				if(u_res.equals(logged1.Acc_no)) {
+				if(u_res.equals(logged1.getAccNum())) {
 					index=i;
 					break;
 				}
@@ -226,6 +239,7 @@ public class UI {
 		//logged=(Checking)a.get(index);
 		}
 		System.out.println("Index is :"+index);
+		//System.out.println("Welcome "+getName());
 		Operations(index,AccT);
 		
 		
@@ -252,7 +266,7 @@ public class UI {
 		//------------------------------------------------------------
 
 		UI interface1=new UI();
-		interface1.UIRead();
+		//interface1.UIRead();
 		int id=0;//unique identifier for new comers
 		char option='z';//To make menu
 		//------------------------------------------------------------

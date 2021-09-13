@@ -20,12 +20,12 @@ public class Saving extends Accounts {
 	
 	public void withdraw(int amt) {
 		int temp=0;
-		temp=account_balance-amt;
+		temp=getBalance()-amt;
 		if(temp<0) {
-			System.out.println("You are exceeding your current balance limits for you Saving Account. WithDrawal failed. Current Balance: Rs"+account_balance);
+			System.out.println("You are exceeding your current balance limits for you Saving Account. WithDrawal failed. Current Balance: Rs"+getBalance());
 		}
 		else {
-			account_balance=account_balance-amt;
+			setBalance(getBalance()-amt);
 		}
 	}
 	

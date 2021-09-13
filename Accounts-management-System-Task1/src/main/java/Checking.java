@@ -29,12 +29,12 @@ public class Checking extends Accounts {
 	
 	public void withdraw(int amt) {
 		int temp;
-		temp=account_balance-amt;
+		temp=getBalance()-amt;
 		if(temp<-5000) {
 			System.out.println("You have reached withdrawal limit. Please clear remaining charges first");
 		}
 		else{
-			account_balance=account_balance-amt;
+			setBalance(getBalance()-amt);
 		}
 	}
 	

@@ -14,9 +14,9 @@ import java.util.Scanner;
  *
  */
 public class Accounts {
-	protected String Acc_no;
+	private String Acc_no;
 	private char account_typ;
-	protected int account_balance;
+	private int account_balance;
 	private String date_created;
 	private String name;
 
@@ -38,12 +38,12 @@ public class Accounts {
 		account_typ=A;
 		System.out.println("Account created on "+dtf.format(now));
 		date_created=dtf.format(now);
-		try {
+		/*try {
 			write_to();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}*/
 		// TODO Auto-generated constructor stub
 	}
 	//--------------------------------------------------------------------
@@ -71,6 +71,22 @@ public class Accounts {
 	
 	public String getName() {
 		return name;
+	}
+//-----------------------------------------------	
+	public void setAccNum(String n) {
+		Acc_no=n;
+	}
+	
+	public String getAccNum() {
+		return Acc_no;
+	}
+	//------------------------------------------
+	public void setBalance(int n) {
+		account_balance=n;
+	}
+	
+	public int getBalance() {
+		return account_balance;
 	}
 	
 	
