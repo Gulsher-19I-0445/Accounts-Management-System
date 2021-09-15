@@ -2,6 +2,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 /**
@@ -201,7 +202,7 @@ public class Accounts {
 		csvWriter.append(",");
 		csvWriter.append(name);
 		csvWriter.append(",");
-		String s=String.valueOf(account_balance);//Now it will return "10" 
+		String s=String.valueOf(account_balance);
 		csvWriter.append(s);
 		csvWriter.append(",");
 		csvWriter.append(date_created);
@@ -263,17 +264,46 @@ public class Accounts {
 		System.out.println("Account "+k.getAccNum()+" found");
 		System.out.println("Enter the amount of money you want to deposit");
 		Scanner i1=new Scanner(System.in);
-		int am=i1.nextInt();
+		int am=0;
+		
+		/////////////////////////////////////////////////////////
+		try
+		{
+			am=i1.nextInt();
+		}
+		catch(InputMismatchException exception)
+		{
+			System.out.println("Not a valid input. Please enter the amount in numbers");
+		}
+		////////////////////////////////////////////////////////
 		account_balance=account_balance-am;
 		int newB=k.getBalance()+am;
 		k.setBalance(newB);
-	//logged=(Checking)a.get(index);	
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");  
+		LocalDateTime now = LocalDateTime.now();
+		System.out.println("An amount of Rs "+am+" was deposited into account "+k.getAccNum()+" owned by "+k.getName()+" on "+dtf.format(now));
+		k.setMsg("An amount of Rs "+am+" was deposited into your account by account number "+Acc_no+" owned by "+name+" on "+dtf.format(now));
+	
 	}
+	
+	
 	public void transfer(Saving k) {
 		System.out.println("Account "+k.getAccNum()+" found");
 		System.out.println("Enter the amount of money you want to deposit");
 		Scanner i1=new Scanner(System.in);
-		int am=i1.nextInt();
+		int am=0;
+		
+		
+		try
+		{
+			am=i1.nextInt();
+		}
+		catch(InputMismatchException exception)
+		{
+			System.out.println("Not a valid input. Please enter the amount in numbers");
+		}
+		
+		
 		account_balance=account_balance-am;
 		int newB=k.getBalance()+am;
 		k.setBalance(newB);

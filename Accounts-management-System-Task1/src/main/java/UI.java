@@ -58,6 +58,17 @@ public class UI {
 				System.out.println("(E)Transfer Money");
 				Scanner i1=new Scanner(System.in);
 				opt=i1.next().charAt(0);
+				/////////////////////////////////////////////////////////
+				while(true) {
+					if (Character.toString(opt).matches("^[a-eA-E0]*$")) {
+				         //System.out.println("valid input");
+				         break;
+				    }else{
+				         System.out.println("Enter Valid invalid");
+				         opt=i1.next().charAt(0);
+				    }
+					}
+				/////////////////////////////////////////////////////////
 				
 				if(opt=='A'||opt=='a') {
 					b.makeDeposit();
@@ -104,7 +115,18 @@ public class UI {
 				System.out.println("(F)Calculate Zakat");
 				//System.out.println("(G)Display all deductions");
 				Scanner i1=new Scanner(System.in);
+				
 				opt=i1.next().charAt(0);
+				
+				while(true) {
+					if (Character.toString(opt).matches("^[a-eA-E0]*$")) {
+				         //System.out.println("valid input");
+				         break;
+				    }else{
+				         System.out.println("Enter Valid invalid");
+				         opt=i1.next().charAt(0);
+				    }
+					}
 				
 				if(opt=='A'||opt=='a') {
 					
@@ -158,6 +180,17 @@ public class UI {
 		System.out.println("Press X for Checking");
 		System.out.println("Press Y for Saving");
 		char AccT=i1.next().charAt(0);
+		///////////////////////////////////////////////////////
+		while(true) {
+			if (Character.toString(AccT).matches("^[x-yX-Y]*$")) {
+		         //System.out.println("valid input");
+		         break;
+		    }else{
+		         System.out.println("Enter Valid invalid");
+		         AccT=i1.next().charAt(0);
+		    }
+			}
+		/////////////////////////////////////////////////
 		
 		if(AccT=='X'||AccT=='x') {
 			String uniqueID = UUID.randomUUID().toString();
@@ -190,6 +223,16 @@ public class UI {
 		System.out.println("Press X for Checking Account");
 		System.out.println("Press Y for Saving Account");
 		char AccT=i1.next().charAt(0);
+		while(true) {
+		if (Character.toString(AccT).matches("^[x-yX-Y]*$")) {
+	         //System.out.println("valid input");
+	         break;
+	    }else{
+	         System.out.println("Enter Valid invalid");
+	         AccT=i1.next().charAt(0);
+	    }
+		}
+		
 		Checking logged;
 		Saving logged1;
 		//Checking logged;
@@ -197,33 +240,7 @@ public class UI {
 		System.out.println("Enter your Account number");
 		String u_res=i9.next();
 		index=findAcc(u_res);
-		/*if(AccT=='X') {
-			Scanner i9=new Scanner(System.in);
-			System.out.println("Enter your Account number");
-			String u_res=i9.next();
-			for(int i=0;i<a.size();i++) {
-				logged=(Checking)a.get(i);
-				
-				if(u_res.equals(logged.getAccNum())) {
-					
-					index=i;
-					break;
-				}
-			}
-			
-		}
-		else if(AccT=='Y') {
-			System.out.println("Enter your Account number");
-			String u_res=i1.next();
-			for(int i=0;i<s.size();i++) {
-				logged1=(Saving)s.get(i);
-				if(u_res.equals(logged1.getAccNum())) {
-					index=i;
-					break;
-				}
-			}
 
-		}*/
 		Operations(index,AccT);
 		
 		
@@ -270,10 +287,10 @@ public class UI {
 			
 		}
 		for(j=0;j<s.size();j++) {
-			logged1=(Saving)s.get(i);
+			logged1=(Saving)s.get(j);
 			if(num.equals(logged1.getAccNum())) {
 			
-				index=i;
+				index=j;
 				check=0;
 				break;
 			}
@@ -321,10 +338,10 @@ public class UI {
 			
 		}
 		for(j=0;j<s.size();j++) {
-			logged1=(Saving)s.get(i);
+			logged1=(Saving)s.get(j);
 			if(num.equals(logged1.getAccNum())) {
 			
-				index=i;
+				index=j;
 				check=0;
 				break;
 			}
@@ -375,10 +392,10 @@ public class UI {
 			
 		}
 		for(j=0;j<s.size();j++) {
-			logged1=(Saving)s.get(i);
+			logged1=(Saving)s.get(j);
 			if(num.equals(logged1.getAccNum())) {
 			
-				index=i;
+				index=j;
 				check=0;
 				break;
 			}
@@ -416,6 +433,17 @@ public class UI {
 		System.out.println("Press (A) to sign up");
 		System.out.println("Press (B) to sign in");
 		option=i1.next().charAt(0);
+		
+		while(true) {
+			if (Character.toString(option).matches("^[a-bA-B]*$")) {
+		         //System.out.println("valid input");
+		         break;
+		    }else{
+		         System.out.println("Enter Valid invalid");
+		         option=i1.next().charAt(0);
+		    }
+			}
+		
 		if(option=='a'||option=='A')
 		interface1.SignUp();
 		
