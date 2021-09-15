@@ -16,7 +16,7 @@ public class UI {
 	private ArrayList<Saving> s=new ArrayList<Saving>();
 	int unique1;
 	int unique2;
-	//Accounts a=new Accounts();
+	
 	
 	
 	
@@ -24,48 +24,14 @@ public class UI {
 	//----------------------Constructor--------------------------------
 	//-----------------------------------------------------------------
 	public UI() throws FileNotFoundException, IOException {
-		//a.add(new Accounts());
-		//System.out.println("Hello");
+		
 		unique1=0;
 		unique2=0;
 
 		// TODO Auto-generated constructor stub
 	}
 	
-	public void  UIRead() throws FileNotFoundException, IOException {
-		try (BufferedReader br = new BufferedReader(new FileReader("new.csv"))) {
 
-		    // List to collect Employee objects
-		   // List<Employee> employees = new ArrayList<Employee>();
-			int i=0;
-			char temp1='0';
-		    // Read file line by line
-		    String line = "";
-		    while ((line = br.readLine()) != null) {
-		       // Parse line to extract individual fields
-		    	System.out.println("lol");
-		       String[] data ;
-		    	data=line.split(",");
-		    	if(i>0) {
-		       // Create new Employee object
-		    	//if(data[2])
-		    	if(data[4].equals("Checking")) {
-		    		temp1='X';
-		    	}
-		    	else if(data[4].equals("Saving")) {
-		    		temp1='Y';
-		    	}
-		       a.add(new Checking(temp1,data[0],data[1],Integer.valueOf(data[2]),data[3]));
-		       //Checking employee = new Checking();
-		    	}
-		    	i++;
-		       // Add object to list
-		       //employees.add(employee);
-		    }
-
-		    // Further process your Employee objects...
-		}
-	}
 	
 	//----------------------------------------------------------------
 		//-----------------------Accounts Detail--------------------------
@@ -90,19 +56,8 @@ public class UI {
 				System.out.println("(C)Check Balance");
 				System.out.println("(D)PrintStatement");
 				System.out.println("(E)Transfer Money");
-				//System.out.println("(F)Calculate Zakat");
-				//System.out.println("(G)Display all deductions");
 				Scanner i1=new Scanner(System.in);
 				opt=i1.next().charAt(0);
-				/*while(opt!='A'||opt!='a'||opt!='B'||opt!='b'||opt!='C'||opt!='c'||opt!='D'||opt!='d'||opt!='E'||opt!='e'||opt!='F'||opt!='f'||opt!='G'||opt!='g') {
-					//if(x>0) {
-						//Scanner i1=new Scanner(System.in);
-						System.out.println("Please select a valid option");
-						//x++;
-					//}
-					i1=new Scanner(System.in);
-					opt=i1.next().charAt(0);
-					}*/
 				
 				if(opt=='A'||opt=='a') {
 					b.makeDeposit();
@@ -150,22 +105,11 @@ public class UI {
 				//System.out.println("(G)Display all deductions");
 				Scanner i1=new Scanner(System.in);
 				opt=i1.next().charAt(0);
-				/*while(opt!='A'||opt!='a'||opt!='B'||opt!='b'||opt!='C'||opt!='c'||opt!='D'||opt!='d'||opt!='E'||opt!='e'||opt!='F'||opt!='f'||opt!='G'||opt!='g') {
-					//if(x>0) {
-						//Scanner i1=new Scanner(System.in);
-						System.out.println("Please select a valid option");
-						//x++;
-					//}
-					i1=new Scanner(System.in);
-					opt=i1.next().charAt(0);
-					}*/
+				
 				if(opt=='A'||opt=='a') {
+					
 					c.makeDeposit();
-					//if(b.free_count==0) {
-					//	System.out.println("\nYour free monthly deposit has ended");
-						//b.deduction();
-					//}
-					//b.free_count--;
+					
 					}
 				
 				if(opt=='B'||opt=='b') {
@@ -214,18 +158,10 @@ public class UI {
 		System.out.println("Press X for Checking");
 		System.out.println("Press Y for Saving");
 		char AccT=i1.next().charAt(0);
-		/*while(AccT!='X'||AccT!='x'||AccT!='Y'||AccT!='y') {
-			//if(x>0) {
-				//Scanner i1=new Scanner(System.in);
-				System.out.println("Please Enter a Valid ammount");
-				//x++;
-			//}
-			i1=new Scanner(System.in);
-			AccT=i1.next().charAt(0);
-			}*/
+		
 		if(AccT=='X'||AccT=='x') {
 			String uniqueID = UUID.randomUUID().toString();
-			//System.out.println(uniqueID);
+			
 			a.add(new Checking(AccT,uniqueID,name));
 			
 			System.out.println("Account successfully Created\n"+"Your Account ID is: "+uniqueID+"\n Remember this ID to Access your account and keep it secure\n");
@@ -240,10 +176,10 @@ public class UI {
 			Operations(unique2,AccT);
 			unique2++;
 		}
-		//System.out.println("Enter Account Number");
-		//int accNum=i1.nextInt();
-		//a.add(new Accounts(AccT,unique));
+		
 	}
+	
+	
 	//--------------------------------------------------------------------------------------------------------------------------------
 	//---------------------------------				LOGIN				--------------------------------------------------------------
 	//--------------------------------------------------------------------------------------------------------------------------------
@@ -263,15 +199,14 @@ public class UI {
 			String u_res=i9.next();
 			for(int i=0;i<a.size();i++) {
 				logged=(Checking)a.get(i);
-				//ASystem.out.println(logged.Acc_no+" |");
-				//System.out.println(u_res+" |");
+				
 				if(u_res.equals(logged.getAccNum())) {
-					//System.out.println("llllllllllllllllllllllllll");
+					
 					index=i;
 					break;
 				}
 			}
-		//logged=(Checking)a.get(index);	
+			
 		}
 		else if(AccT=='Y') {
 			System.out.println("Enter your Account number");
@@ -283,10 +218,8 @@ public class UI {
 					break;
 				}
 			}
-		//logged=(Checking)a.get(index);
+
 		}
-		//System.out.println("Index is :"+index);
-		//System.out.println("Welcome "+getName());
 		Operations(index,AccT);
 		
 		
@@ -297,7 +230,7 @@ public class UI {
 	
 	
 	//----------------------------------------------------------------
-	//----------------------Initial Display Function------------------
+	//----------------------TRANSFER TOO------------------
 	//----------------------------------------------------------------
 	
 	public void Show(int n) {
@@ -305,7 +238,7 @@ public class UI {
 		//b.Display();
 	}
 	
-	//----------------------------------------------------------------
+		//----------------------FOR CHECKING------------------------------------------
 	
 	public void TransferTo(Checking c1) {
 		int check=2;		//1 for checjing and 2 for saving
@@ -321,10 +254,9 @@ public class UI {
 		for(i=0;i<a.size();i++) {
 			
 			logged=(Checking)a.get(i);
-			//ASystem.out.println(logged.Acc_no+" |");
-			//System.out.println(u_res+" |");
+			
 			if(num.equals(logged.getAccNum())) {
-				//System.out.println("llllllllllllllllllllllllll");
+			
 				index=i;
 				check=1;
 				break;
@@ -336,7 +268,7 @@ public class UI {
 		for(j=0;j<s.size();j++) {
 			logged1=(Saving)s.get(i);
 			if(num.equals(logged1.getAccNum())) {
-				//System.out.println("llllllllllllllllllllllllll");
+			
 				index=i;
 				check=0;
 				break;
@@ -357,9 +289,10 @@ public class UI {
 			
 		}
 	}
-	//----------------------------------------------------------------
+	
+		//--------------------FOR SAVING------------------------------------------
 	public void TransferTo(Saving s1) {
-		int check=2;		//1 for checjing and 2 for saving
+		int check=2;		//1 for checKing and 2 for saving
 		String num=" ";		//Account number
 		int index=0;
 		int i=0;
@@ -372,10 +305,9 @@ public class UI {
 			
 			logged=(Checking)a.get(i);
 			logged1=(Saving)s.get(i);
-			//ASystem.out.println(logged.Acc_no+" |");
-			//System.out.println(u_res+" |");
+			
 			if(num.equals(logged.getAccNum())) {
-				//System.out.println("llllllllllllllllllllllllll");
+				
 				index=i;
 				check=1;
 				break;
@@ -383,7 +315,7 @@ public class UI {
 			
 			
 			else if(num.equals(logged1.getAccNum())) {
-				System.out.println("llllllllllllllllllllllllll");
+			
 				index=i;
 				check=0;
 				break;
@@ -406,6 +338,61 @@ public class UI {
 		}
 	}
 	
+	//FIND Account Function
+	
+	public Accounts findAcc(String to_find) {
+		//---------------------------
+		int check=2;		//1 for checKing and 2 for saving
+		String num=to_find;		//Account number
+		int index=0;
+		int i=0;
+		Checking logged = null;
+		Saving logged1=null;
+		//---------------------------
+		for(i=0;i<a.size();i++) {
+			
+			logged=(Checking)a.get(i);
+			logged1=(Saving)s.get(i);
+			
+			if(num.equals(logged.getAccNum())) {
+				
+				index=i;
+				check=1;
+				break;
+			}
+			
+			
+			else if(num.equals(logged1.getAccNum())) {
+			
+				index=i;
+				check=0;
+				break;
+			}
+			
+		}
+		if(index==a.size()) {
+			System.out.println("This account does not exits");
+			return null;
+		}
+		else {
+			if(check==1) {
+			logged=(Checking)a.get(index);
+			return logged;
+			}
+			else if(check==0) {
+			logged1=(Saving)s.get(index);
+			return logged1;
+			}
+			
+		}
+		return null;
+		//return logged1;
+	
+	}
+	
+	
+	
+	
 	
 	//----------------------------------------------------------------
 	//----------------------Int Main----------------------------------
@@ -415,7 +402,7 @@ public class UI {
 		//------------------------------------------------------------
 
 		UI interface1=new UI();
-		//interface1.UIRead();
+		
 		int id=0;//unique identifier for new comers
 		char option='z';//To make menu
 		//------------------------------------------------------------
@@ -429,7 +416,7 @@ public class UI {
 		if(option=='a'||option=='A')
 		interface1.SignUp();
 		
-		//interface1.Show(id);
+		
 		id++;
 		if(option=='b'||option=='B') {
 			interface1.Login();
