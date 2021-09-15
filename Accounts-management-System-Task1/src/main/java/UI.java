@@ -193,7 +193,11 @@ public class UI {
 		Checking logged;
 		Saving logged1;
 		//Checking logged;
-		if(AccT=='X') {
+		Scanner i9=new Scanner(System.in);
+		System.out.println("Enter your Account number");
+		String u_res=i9.next();
+		index=findAcc(u_res);
+		/*if(AccT=='X') {
 			Scanner i9=new Scanner(System.in);
 			System.out.println("Enter your Account number");
 			String u_res=i9.next();
@@ -219,7 +223,7 @@ public class UI {
 				}
 			}
 
-		}
+		}*/
 		Operations(index,AccT);
 		
 		
@@ -296,6 +300,7 @@ public class UI {
 		String num=" ";		//Account number
 		int index=0;
 		int i=0;
+		int j=0;
 		System.out.println("Enter the account number of the account you want to transfer money to");
 		Scanner i1=new Scanner(System.in);
 		num=i1.next();
@@ -304,23 +309,28 @@ public class UI {
 		for(i=0;i<a.size();i++) {
 			
 			logged=(Checking)a.get(i);
-			logged1=(Saving)s.get(i);
 			
 			if(num.equals(logged.getAccNum())) {
-				
+			
 				index=i;
 				check=1;
 				break;
 			}
 			
 			
-			else if(num.equals(logged1.getAccNum())) {
+			
+		}
+		for(j=0;j<s.size();j++) {
+			logged1=(Saving)s.get(i);
+			if(num.equals(logged1.getAccNum())) {
 			
 				index=i;
 				check=0;
 				break;
 			}
-			
+		}
+		if(index==a.size()) {
+			System.out.println("This account does not exits");
 		}
 		if(index==a.size()) {
 			System.out.println("This account does not exits");
@@ -340,53 +350,46 @@ public class UI {
 	
 	//FIND Account Function
 	
-	public Accounts findAcc(String to_find) {
+	public int findAcc(String to_find) {
 		//---------------------------
 		int check=2;		//1 for checKing and 2 for saving
 		String num=to_find;		//Account number
 		int index=0;
 		int i=0;
+		int j=0;
 		Checking logged = null;
 		Saving logged1=null;
 		//---------------------------
 		for(i=0;i<a.size();i++) {
 			
 			logged=(Checking)a.get(i);
-			logged1=(Saving)s.get(i);
 			
 			if(num.equals(logged.getAccNum())) {
-				
+			
 				index=i;
 				check=1;
 				break;
 			}
 			
 			
-			else if(num.equals(logged1.getAccNum())) {
+			
+		}
+		for(j=0;j<s.size();j++) {
+			logged1=(Saving)s.get(i);
+			if(num.equals(logged1.getAccNum())) {
 			
 				index=i;
 				check=0;
 				break;
 			}
-			
 		}
 		if(index==a.size()) {
 			System.out.println("This account does not exits");
-			return null;
 		}
-		else {
-			if(check==1) {
-			logged=(Checking)a.get(index);
-			return logged;
-			}
-			else if(check==0) {
-			logged1=(Saving)s.get(index);
-			return logged1;
-			}
-			
-		}
-		return null;
-		//return logged1;
+
+		
+		return index;
+		
 	
 	}
 	
