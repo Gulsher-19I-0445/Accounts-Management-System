@@ -130,7 +130,9 @@ public class Accounts {
 	public void setMsg(String m) {
 		msg=m;
 	}
-	
+	public String getDate() {
+		return date_created;
+	}
 	
 	
 	

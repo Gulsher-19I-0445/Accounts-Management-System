@@ -1,6 +1,4 @@
-import java.io.BufferedReader;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -16,6 +14,7 @@ public class UI {
 	private ArrayList<Saving> s=new ArrayList<Saving>();
 	int unique1;
 	int unique2;
+	private String p_word;
 	
 	
 	
@@ -27,6 +26,7 @@ public class UI {
 		
 		unique1=0;
 		unique2=0;
+		p_word="1234";
 
 		// TODO Auto-generated constructor stub
 	}
@@ -42,6 +42,7 @@ public class UI {
 			//Checking b=(Checking)a.get(i);
 			
 			char opt='M';
+			try {
 			while(opt!='0') {
 			if(atyp=='X'||atyp=='x') {
 				Checking b=(Checking)a.get(i);
@@ -99,8 +100,23 @@ public class UI {
 				
 			}
 			//-----------------------------
+			//try {
 			if(atyp=='Y'||atyp=='y') {
-				Saving c=(Saving)s.get(i);
+				//
+				Saving c=null;
+				//try
+				//{
+					c=(Saving)s.get(i);
+				//}
+				//catch(IndexOutOfBoundsException exception)
+				//{
+					//System.out.println("DOES NOT EXITS");
+				//}
+				
+				
+				//
+				//Saving c=(Saving)s.get(i);
+				
 				if(c1==0) {
 					System.out.println("Welcome "+c.getName());
 					c1++;
@@ -160,8 +176,18 @@ public class UI {
 				
 				
 			}
+			//}
+			
+			
+			//
 			
 		}
+		}
+			catch(IndexOutOfBoundsException exception)
+			{
+				System.out.println("This account does not exist");
+			}	
+		//
 			
 		}
 	
@@ -240,9 +266,12 @@ public class UI {
 		System.out.println("Enter your Account number");
 		String u_res=i9.next();
 		index=findAcc(u_res);
-
+		//if(index==-1) {
+			//System.out.println("Enter an existing account");
+		//}
+		//else {
 		Operations(index,AccT);
-		
+		//}
 		
 		
 	}
@@ -298,6 +327,9 @@ public class UI {
 		if(index==a.size()) {
 			System.out.println("This account does not exits");
 		}
+		else if(index==s.size()) {
+			System.out.println("This account does not exits");
+		}
 		else {
 			if(check==1) {
 			logged=(Checking)a.get(index);
@@ -349,7 +381,7 @@ public class UI {
 		if(index==a.size()) {
 			System.out.println("This account does not exits");
 		}
-		if(index==a.size()) {
+		else if(index==s.size()) {
 			System.out.println("This account does not exits");
 		}
 		else {
@@ -401,7 +433,12 @@ public class UI {
 			}
 		}
 		if(index==a.size()) {
-			System.out.println("This account does not exits");
+			//System.out.println("This account does not exits");
+			//return -1;
+		}
+		else if(index==s.size()) {
+			//System.out.println("This account does not exits");
+			//return -1;
 		}
 
 		
@@ -410,8 +447,129 @@ public class UI {
 	
 	}
 	
+	//-----------------------------Admin-------------------------------------------------
+	public void admin(String pass) {
+		if(pass.equals(p_word)) {
+			adminMenu();
+		}
+	}
+	
+	//----------------------------------------------------------------
+	public void deleteAcc() {
+		int ind=0;
+		Scanner i1=new Scanner(System.in);
+		System.out.println("Select your Account Type");
+		System.out.println("Press X for Checking Account");
+		System.out.println("Press Y for Saving Account");
+		char AccT=i1.next().charAt(0);
+		Checking acc1=null;
+		Saving acc2=null;
+		while(true) {
+		if (Character.toString(AccT).matches("^[x-yX-Y]*$")) {
+	         //System.out.println("valid input");
+	         break;
+	    }else{
+	         System.out.println("Enter Valid invalid");
+	         AccT=i1.next().charAt(0);
+	    }
+		}
+		//-----------------
+		System.out.println("Enter the account number of the account you want to delete");
+		Scanner i5=new Scanner(System.in);
+		String num=i5.next();
+		//-----------------
+		ind=findAcc(num);
+		if(AccT=='X'||AccT=='x') {
+			try {
+			acc1=a.get(ind);
+			System.out.println("Account with ID "+acc1.getAccNum()+ "owned by "+acc1.getName()+" is removed");
+			a.remove(ind);
+			unique1--;
+			}
+			catch(IndexOutOfBoundsException exception) {
+				System.out.println("Account does not exits");	
+			}
+		}
+		else if(AccT=='Y'||AccT=='y') {
+			try {
+				acc2=s.get(ind);
+				System.out.println("Account with ID "+acc2.getAccNum()+ "owned by "+acc2.getName()+" is removed");
+				s.remove(ind);
+				unique2--;
+			}
+			catch(IndexOutOfBoundsException exception) {
+				System.out.println("Account does not exits");	
+			}
+		}
+		
+		
+	}
+	
+	//----------------------------------------------------------------
+	
+	public void ShowAll() {
+		System.out.println("Showing Checking accounts");
+		System.out.println("Account Numbers				|   Owner Names		|	Date Created	");
+		Checking acc1=null;
+		Saving acc2=null;
+		for(int i=0;i<a.size();i++) {
+			acc1=a.get(i);
+			
+			System.out.println(acc1.getAccNum()+"	|	"+acc1.getName()+"	 |	"+acc1.getDate());
+			
+		}
+		
+		System.out.println("Showing Saving accounts");
+		System.out.println("Account Numbers				|   Owner Names		|	Date Created	");
+		
+		for(int i=0;i<s.size();i++) {
+			acc2=s.get(i);
+			
+			System.out.println(acc2.getAccNum()+"	|	"+acc2.getName()+"	|	"+acc2.getDate());
+			
+		}
+		
+		
+	}
 	
 	
+	//----------------------------------------------------------------
+	
+	public void adminMenu() {
+		char opt = 'z';
+		while(opt!='f'||opt!='F') {
+		Scanner i1=new Scanner(System.in);
+		System.out.println("Select the Options below to proceed");
+		System.out.println("Press (A) to remove an account");
+		System.out.println("Press (B) to Log In");
+		opt=i1.next().charAt(0);
+		
+		while(true) {
+			if (Character.toString(opt).matches("^[a-fA-F]*$")) {
+		         //System.out.println("valid input");
+		         break;
+		    }else{
+		         System.out.println("Enter Valid input");
+		         opt=i1.next().charAt(0);
+		    }
+		}
+		
+		if(opt=='a'||opt=='A') {
+			deleteAcc();
+		}
+		
+		if(opt=='b'||opt=='B') {
+			ShowAll();
+		}
+		
+		if(opt=='f'||opt=='F') {
+			break;
+		}
+		
+		
+	}
+
+	}
 	
 	
 	//----------------------------------------------------------------
@@ -430,16 +588,17 @@ public class UI {
 		while(option!='e'||option!='E') {
 		Scanner i1=new Scanner(System.in);
 		System.out.println("Select the Options below to proceed");
-		System.out.println("Press (A) to sign up");
-		System.out.println("Press (B) to sign in");
+		System.out.println("Press (A) to Register an Account");
+		System.out.println("Press (B) to Log In");
+		System.out.println("Press (C) to Admin");
 		option=i1.next().charAt(0);
 		
 		while(true) {
-			if (Character.toString(option).matches("^[a-bA-B]*$")) {
+			if (Character.toString(option).matches("^[a-cA-C]*$")) {
 		         //System.out.println("valid input");
 		         break;
 		    }else{
-		         System.out.println("Enter Valid invalid");
+		         System.out.println("Enter Valid input");
 		         option=i1.next().charAt(0);
 		    }
 			}
@@ -452,6 +611,16 @@ public class UI {
 		if(option=='b'||option=='B') {
 			interface1.Login();
 		}
+		
+		if(option=='c'||option=='C') {
+			
+			System.out.println("Enter the password");
+			Scanner i5=new Scanner(System.in);
+			String num=i5.next();
+			
+			interface1.adminMenu();
+		}
+		
 		// TODO Auto-generated method stub
 		}
 	}
