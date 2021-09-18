@@ -590,7 +590,7 @@ public class UI {
 		System.out.println("Select the Options below to proceed");
 		System.out.println("Press (A) to Register an Account");
 		System.out.println("Press (B) to Log In");
-		System.out.println("Press (C) to Admin");
+		System.out.println("Press (C) to access Access Admin");
 		option=i1.next().charAt(0);
 		
 		while(true) {
