@@ -1,5 +1,6 @@
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Scanner;
 
 public class Checking extends Accounts {
 	int free_count;
@@ -48,6 +49,34 @@ public class Checking extends Accounts {
 		setd(cTr,dtf.format(now));
 		cTr++;
 		}
+	}
+	
+	public void makeDeposit() {
+		int amt=-1;
+		int x=0;
+		Scanner i1;
+		System.out.println("Enter the amount to Deposit");
+		i1=new Scanner(System.in);
+		amt=i1.nextInt();
+		while(amt<0) {
+		//if(x>0) {
+			//Scanner i1=new Scanner(System.in);
+			System.out.println("Please Enter a Valid ammount");
+			//x++;
+		//}
+		i1=new Scanner(System.in);
+		amt=i1.nextInt();
+		}
+		setBalance(getBalance()+amt);
+		System.out.print("Rs"+amt+" added to your balance");
+		//int temp1=0;
+		setT(getCount(),amt);
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");  
+		LocalDateTime now = LocalDateTime.now();
+		setd(getCount(),dtf.format(now));
+		setCount(getCount()+1);
+		
+		
 	}
 	
 	

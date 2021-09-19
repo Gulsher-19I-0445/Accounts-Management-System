@@ -42,7 +42,7 @@ public class UI {
 			//Checking b=(Checking)a.get(i);
 			
 			char opt='M';
-			try {
+			//try {
 			while(opt!='0') {
 			if(atyp=='X'||atyp=='x') {
 				Checking b=(Checking)a.get(i);
@@ -85,6 +85,15 @@ public class UI {
 					Scanner i2=new Scanner(System.in);
 					System.out.println("Enter the amount you want to withDraw");
 					am=i2.nextInt();
+					while(am<0) {
+						//if(x>0) {
+							//Scanner i1=new Scanner(System.in);
+							System.out.println("Please Enter a Valid ammount");
+							//x++;
+						//}
+						i2=new Scanner(System.in);
+						am=i2.nextInt();
+						}
 					b.withdraw(am);
 				}
 				
@@ -155,6 +164,15 @@ public class UI {
 					Scanner i2=new Scanner(System.in);
 					System.out.println("Enter the amount you want to withDraw");
 					am=i2.nextInt();
+					while(am<0) {
+						//if(x>0) {
+							//Scanner i1=new Scanner(System.in);
+							System.out.println("Please Enter a Valid ammount");
+							//x++;
+						//}
+						i1=new Scanner(System.in);
+						am=i1.nextInt();
+						}
 					c.withdraw(am);
 				}
 				
@@ -182,11 +200,11 @@ public class UI {
 			//
 			
 		}
-		}
-			catch(IndexOutOfBoundsException exception)
-			{
-				System.out.println("This account does not exist");
-			}	
+		//}
+			//catch(IndexOutOfBoundsException exception)
+			//{
+				//System.out.println("This account does not exist");
+			//}	
 		//
 			
 		}
@@ -243,7 +261,7 @@ public class UI {
 	//---------------------------------				LOGIN				--------------------------------------------------------------
 	//--------------------------------------------------------------------------------------------------------------------------------
 	public void Login() {
-		int index=0;
+		int index=-1;
 		Scanner i1=new Scanner(System.in);
 		System.out.println("Select your Account Type");
 		System.out.println("Press X for Checking Account");
@@ -270,7 +288,12 @@ public class UI {
 			//System.out.println("Enter an existing account");
 		//}
 		//else {
+		try {
 		Operations(index,AccT);
+		}
+		catch(IndexOutOfBoundsException Exception) {
+			System.out.println("Enter an existing account");
+		}
 		//}
 		
 		
@@ -324,13 +347,13 @@ public class UI {
 				break;
 			}
 		}
-		if(index==a.size()) {
-			System.out.println("This account does not exits");
-		}
-		else if(index==s.size()) {
-			System.out.println("This account does not exits");
-		}
-		else {
+		//if(index==a.size()) {
+			//sSystem.out.println("This account does not exits");
+		//}
+		//else if(index==s.size()) {
+			//System.out.println("This account does not exits");
+		//}
+		//else {
 			if(check==1) {
 			logged=(Checking)a.get(index);
 			c1.transfer(logged);
@@ -340,7 +363,7 @@ public class UI {
 			c1.transfer(logged1);
 			}
 			
-		}
+		//}
 	}
 	
 		//--------------------FOR SAVING------------------------------------------
@@ -378,13 +401,13 @@ public class UI {
 				break;
 			}
 		}
-		if(index==a.size()) {
-			System.out.println("This account does not exits");
-		}
-		else if(index==s.size()) {
-			System.out.println("This account does not exits");
-		}
-		else {
+		//if(index==a.size()) {
+			//System.out.println("This account does not exits");
+		//}
+		//else if(index==s.size()) {
+			//System.out.println("This account does not exits");
+		//}
+		//else {
 			if(check==1) {
 			logged=(Checking)a.get(index);
 			s1.transfer(logged);
@@ -395,7 +418,7 @@ public class UI {
 			}
 			
 		}
-	}
+	//}
 	
 	//FIND Account Function
 	
@@ -403,12 +426,13 @@ public class UI {
 		//---------------------------
 		int check=2;		//1 for checKing and 2 for saving
 		String num=to_find;		//Account number
-		int index=0;
+		int index=-1;
 		int i=0;
 		int j=0;
 		Checking logged = null;
 		Saving logged1=null;
 		//---------------------------
+	//	try{
 		for(i=0;i<a.size();i++) {
 			
 			logged=(Checking)a.get(i);
@@ -417,8 +441,10 @@ public class UI {
 			
 				index=i;
 				check=1;
+				i=a.size()+1;
 				break;
 			}
+			
 			
 			
 			
@@ -426,26 +452,117 @@ public class UI {
 		for(j=0;j<s.size();j++) {
 			logged1=(Saving)s.get(j);
 			if(num.equals(logged1.getAccNum())) {
-			
+				//System.out.println("Hello");
 				index=j;
 				check=0;
-				break;
+				j=s.size()+1;
 			}
 		}
-		if(index==a.size()) {
+		//if(j==0) {
 			//System.out.println("This account does not exits");
 			//return -1;
-		}
-		else if(index==s.size()) {
+		//}
+		//else if(index==0) {
 			//System.out.println("This account does not exits");
-			//return -1;
-		}
+		//	return -1;
+		//}
 
 		
 		return index;
-		
+		}
+		//catch(IndexOutOfBoundsException Exception){
+			//System.out.println("Account does not exist");
+			//return -1;
+			
+		//}
 	
-	}
+	public int findAccCheck(String to_find) {
+		//---------------------------
+		int check=2;		//1 for checKing and 2 for saving
+		String num=to_find;		//Account number
+		int index=-1;
+		int i=0;
+		int j=0;
+		Checking logged = null;
+		//Saving logged1=null;
+		//---------------------------
+	//	try{
+		for(i=0;i<a.size();i++) {
+			
+			logged=(Checking)a.get(i);
+			
+			if(num.equals(logged.getAccNum())) {
+			
+				index=i;
+				check=1;
+				i=a.size()+1;
+				break;
+			}
+			
+			
+			
+			
+		}
+		
+		//if(j==0) {
+			//System.out.println("This account does not exits");
+			//return -1;
+		//}
+		//else if(index==0) {
+			//System.out.println("This account does not exits");
+		//	return -1;
+		//}
+
+		
+		return index;
+		}
+	
+	
+	public int findAccSaving(String to_find) {
+		//---------------------------
+		int check=2;		//1 for checKing and 2 for saving
+		String num=to_find;		//Account number
+		int index=-1;
+		int i=0;
+		int j=0;
+		Checking logged = null;
+		Saving logged1=null;
+		//---------------------------
+	//	try{
+
+		for(j=0;j<s.size();j++) {
+			logged1=(Saving)s.get(j);
+			if(num.equals(logged1.getAccNum())) {
+				//System.out.println("Hello");
+				index=j;
+				check=0;
+				j=s.size()+1;
+			}
+		}
+		//if(j==0) {
+			//System.out.println("This account does not exits");
+			//return -1;
+		//}
+		//else if(index==0) {
+			//System.out.println("This account does not exits");
+		//	return -1;
+		//}
+
+		
+		return index;
+		}
+	
+	
+	
+	
+	
+	
+	
+		
+	//public boolean containsAcc(String num) {
+		
+	//}
+	//}
 	
 	//-----------------------------Admin-------------------------------------------------
 	public void admin(String pass) {
@@ -456,7 +573,7 @@ public class UI {
 	
 	//----------------------------------------------------------------
 	public void deleteAcc() {
-		int ind=0;
+		int ind=-1;
 		Scanner i1=new Scanner(System.in);
 		System.out.println("Select your Account Type");
 		System.out.println("Press X for Checking Account");
@@ -478,8 +595,9 @@ public class UI {
 		Scanner i5=new Scanner(System.in);
 		String num=i5.next();
 		//-----------------
-		ind=findAcc(num);
+		
 		if(AccT=='X'||AccT=='x') {
+			ind=findAccCheck(num);
 			try {
 			acc1=a.get(ind);
 			System.out.println("Account with ID "+acc1.getAccNum()+ "owned by "+acc1.getName()+" is removed");
@@ -492,6 +610,7 @@ public class UI {
 		}
 		else if(AccT=='Y'||AccT=='y') {
 			try {
+				ind=findAccSaving(num);
 				acc2=s.get(ind);
 				System.out.println("Account with ID "+acc2.getAccNum()+ "owned by "+acc2.getName()+" is removed");
 				s.remove(ind);
@@ -537,7 +656,7 @@ public class UI {
 	
 	public void adminMenu() {
 		char opt = 'z';
-		while(opt!='f'||opt!='F') {
+	//	while(opt!='f'||opt!='F') {
 		Scanner i1=new Scanner(System.in);
 		System.out.println("Select the Options below to proceed");
 		System.out.println("Press (A) to remove an account");
@@ -563,11 +682,11 @@ public class UI {
 		}
 		
 		if(opt=='f'||opt=='F') {
-			break;
+		//	break;
 		}
 		
 		
-	}
+	//}
 
 	}
 	

@@ -13,7 +13,7 @@ import java.util.Scanner;
  * @author gulsh
  *
  */
-public class Accounts {
+public abstract class Accounts {
 	private String Acc_no;
 	private char account_typ;
 	private int account_balance;
@@ -134,6 +134,13 @@ public class Accounts {
 		return date_created;
 	}
 	
+	public void setCount(int m) {
+		countT=m;
+	}
+	public int getCount() {
+		return countT;
+	}
+	
 	
 	
 	
@@ -150,33 +157,7 @@ public class Accounts {
 	//--------------------------Make Deposits-----------------------------------
 	//--------------------------------------------------------------------------
 	
-	public void makeDeposit() {
-		int amt=-1;
-		int x=0;
-		Scanner i1;
-		System.out.println("Enter the amount to Deposit");
-		i1=new Scanner(System.in);
-		amt=i1.nextInt();
-		while(amt<0) {
-		//if(x>0) {
-			//Scanner i1=new Scanner(System.in);
-			System.out.println("Please Enter a Valid ammount");
-			//x++;
-		//}
-		i1=new Scanner(System.in);
-		amt=i1.nextInt();
-		}
-		account_balance=account_balance+amt;
-		System.out.print("Rs"+amt+" added to your balance");
-		//int temp1=0;
-		setT(countT,amt);
-		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");  
-		LocalDateTime now = LocalDateTime.now();
-		setd(countT,dtf.format(now));
-		countT++;
-		
-		
-	}
+	public abstract void makeDeposit();
 	//--------------------------------------------------------------------------
 	//--------------------------------WithDraw----------------------------------
 	//--------------------------------------------------------------------------
