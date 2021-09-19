@@ -283,10 +283,13 @@ public class UI {
 		Scanner i9=new Scanner(System.in);
 		System.out.println("Enter your Account number");
 		String u_res=i9.next();
-		index=findAcc(u_res);
-		//if(index==-1) {
-			//System.out.println("Enter an existing account");
-		//}
+		
+		if(AccT=='X'||AccT=='x') {
+			index=findAccCheck(u_res);
+		}
+		else if(AccT=='Y'||AccT=='y') {
+			index=findAccSaving(u_res);
+		}
 		//else {
 		try {
 		Operations(index,AccT);
@@ -456,6 +459,7 @@ public class UI {
 				index=j;
 				check=0;
 				j=s.size()+1;
+				break;
 			}
 		}
 		//if(j==0) {
