@@ -2,8 +2,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.InputMismatchException;
-import java.util.Scanner;
 
 /**
  * 
@@ -157,7 +155,7 @@ public abstract class Accounts {
 	//--------------------------Make Deposits-----------------------------------
 	//--------------------------------------------------------------------------
 	
-	public abstract void makeDeposit();
+	public abstract void makeDeposit(int amt);
 	//--------------------------------------------------------------------------
 	//--------------------------------WithDraw----------------------------------
 	//--------------------------------------------------------------------------
@@ -243,11 +241,11 @@ public abstract class Accounts {
 		
 	}
 	
-	public void transfer(Checking k) {
-		System.out.println("Account "+k.getAccNum()+" found");
-		System.out.println("Enter the amount of money you want to deposit");
+	public void transfer(int am,Checking k) {
+		//System.out.println("Account "+k.getAccNum()+" found");
+		/*System.out.println("Enter the amount of money you want to deposit");
 		Scanner i1=new Scanner(System.in);
-		int am=0;
+		//int am=0;
 		
 		/////////////////////////////////////////////////////////
 		try
@@ -257,8 +255,12 @@ public abstract class Accounts {
 		catch(InputMismatchException exception)
 		{
 			System.out.println("Not a valid input. Please enter the amount in numbers");
-		}
+		}*/
 		////////////////////////////////////////////////////////
+		try {
+		if(am<0) {
+			throw new IllegalArgumentException();
+		}
 		account_balance=account_balance-am;
 		int newB=k.getBalance()+am;
 		k.setBalance(newB);
@@ -266,12 +268,16 @@ public abstract class Accounts {
 		LocalDateTime now = LocalDateTime.now();
 		System.out.println("An amount of Rs "+am+" was deposited into account "+k.getAccNum()+" owned by "+k.getName()+" on "+dtf.format(now));
 		k.setMsg("An amount of Rs "+am+" was deposited into your account by account number "+Acc_no+" owned by "+name+" on "+dtf.format(now));
+		}
+		catch(IllegalArgumentException e){
+			
+		}
 	
 	}
 	
 	
-	public void transfer(Saving k) {
-		System.out.println("Account "+k.getAccNum()+" found");
+	public void transfer(int am,Saving k) {
+		/*System.out.println("Account "+k.getAccNum()+" found");
 		System.out.println("Enter the amount of money you want to deposit");
 		Scanner i1=new Scanner(System.in);
 		int am=0;
@@ -284,7 +290,7 @@ public abstract class Accounts {
 		catch(InputMismatchException exception)
 		{
 			System.out.println("Not a valid input. Please enter the amount in numbers");
-		}
+		}*/
 		
 		
 		account_balance=account_balance-am;

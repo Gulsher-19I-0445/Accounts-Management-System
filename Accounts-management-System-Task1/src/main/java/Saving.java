@@ -52,22 +52,9 @@ public class Saving extends Accounts {
 		}
 	}
 	
-	public void makeDeposit() {
-		int amt=-1;
+	public void makeDeposit(int amt) {
+		//int amt=-1;
 		int x=0;
-		Scanner i1;
-		System.out.println("Enter the amount to Deposit");
-		i1=new Scanner(System.in);
-		amt=i1.nextInt();
-		while(amt<0) {
-		//if(x>0) {
-			//Scanner i1=new Scanner(System.in);
-			System.out.println("Please Enter a Valid ammount");
-			//x++;
-		//}
-		i1=new Scanner(System.in);
-		amt=i1.nextInt();
-		}
 		setBalance(getBalance()+amt);
 		System.out.print("Rs"+amt+" added to your balance");
 		//int temp1=0;

@@ -1,6 +1,7 @@
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.UUID;
 
@@ -72,7 +73,23 @@ public class UI {
 				/////////////////////////////////////////////////////////
 				
 				if(opt=='A'||opt=='a') {
-					b.makeDeposit();
+					
+					int amt1=0;
+					Scanner i10;
+					System.out.println("Enter the amount to Deposit");
+					i10=new Scanner(System.in);
+					amt1=i10.nextInt();
+					while(amt1<0) {
+					//if(x>0) {
+						//Scanner i1=new Scanner(System.in);
+						System.out.println("Please Enter a Valid ammount");
+						//x++;
+					//}
+					i10=new Scanner(System.in);
+					amt1=i10.nextInt();
+					}
+					
+					b.makeDeposit(amt1);
 					if(b.free_count==0) {
 						System.out.println("\nYour free monthly deposit has ended");
 						b.deduction();
@@ -154,8 +171,22 @@ public class UI {
 					}
 				
 				if(opt=='A'||opt=='a') {
+					int amt1=0;
+					Scanner i10;
+					System.out.println("Enter the amount to Deposit");
+					i10=new Scanner(System.in);
+					amt1=i10.nextInt();
+					while(amt1<0) {
+					//if(x>0) {
+						//Scanner i1=new Scanner(System.in);
+						System.out.println("Please Enter a Valid ammount");
+						//x++;
+					//}
+					i10=new Scanner(System.in);
+					amt1=i10.nextInt();
+					}
 					
-					c.makeDeposit();
+					c.makeDeposit(amt1);
 					
 					}
 				
@@ -359,11 +390,45 @@ public class UI {
 		//else {
 			if(check==1) {
 			logged=(Checking)a.get(index);
-			c1.transfer(logged);
+			System.out.println("Account "+logged.getAccNum()+" found");
+			System.out.println("Enter the amount of money you want to deposit");
+			int amt1=0;
+			Scanner i10;
+			i10=new Scanner(System.in);
+			amt1=i10.nextInt();
+			while(amt1<0) {
+			//if(x>0) {
+				//Scanner i1=new Scanner(System.in);
+				System.out.println("Please Enter a Valid ammount");
+				//x++;
+			//}
+			i10=new Scanner(System.in);
+			amt1=i10.nextInt();
+			}
+			
+			
+			c1.transfer(amt1,logged);
 			}
 			else if(check==0) {
 			logged1=(Saving)s.get(index);
-			c1.transfer(logged1);
+			
+			System.out.println("Account "+logged1.getAccNum()+" found");
+			System.out.println("Enter the amount of money you want to deposit");
+			int amt1=0;
+			Scanner i10;
+			i10=new Scanner(System.in);
+			amt1=i10.nextInt();
+			while(amt1<0) {
+			//if(x>0) {
+				//Scanner i1=new Scanner(System.in);
+				System.out.println("Please Enter a Valid ammount");
+				//x++;
+			//}
+			i10=new Scanner(System.in);
+			amt1=i10.nextInt();
+			}
+			
+			c1.transfer(amt1,logged1);
 			}
 			
 		//}
@@ -413,11 +478,45 @@ public class UI {
 		//else {
 			if(check==1) {
 			logged=(Checking)a.get(index);
-			s1.transfer(logged);
+			
+			System.out.println("Account "+logged.getAccNum()+" found");
+			System.out.println("Enter the amount of money you want to deposit");
+			int amt1=0;
+			Scanner i10;
+			i10=new Scanner(System.in);
+			amt1=i10.nextInt();
+			while(amt1<0) {
+			//if(x>0) {
+				//Scanner i1=new Scanner(System.in);
+				System.out.println("Please Enter a Valid ammount");
+				//x++;
+			//}
+			i10=new Scanner(System.in);
+			amt1=i10.nextInt();
+			}
+			
+			s1.transfer(amt1,logged);
 			}
 			else if(check==0) {
 			logged1=(Saving)s.get(index);
-			s1.transfer(logged1);
+			
+			System.out.println("Account "+logged1.getAccNum()+" found");
+			System.out.println("Enter the amount of money you want to deposit");
+			int amt1=0;
+			Scanner i10;
+			i10=new Scanner(System.in);
+			amt1=i10.nextInt();
+			while(amt1<0) {
+			//if(x>0) {
+				//Scanner i1=new Scanner(System.in);
+				System.out.println("Please Enter a Valid ammount");
+				//x++;
+			//}
+			i10=new Scanner(System.in);
+			amt1=i10.nextInt();
+			}
+			
+			s1.transfer(amt1,logged1);
 			}
 			
 		}
