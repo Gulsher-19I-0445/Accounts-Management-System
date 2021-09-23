@@ -33,6 +33,10 @@ public class Checking extends Accounts {
 	//-----------------------------------------------------------------
 	
 	public void withdraw(int amt) {
+		try {
+			if(amt<0) {
+				throw new IllegalArgumentException();
+			}
 		int temp;
 		temp=getBalance()-amt;
 		if(temp<-5000) {
@@ -48,6 +52,10 @@ public class Checking extends Accounts {
 		LocalDateTime now = LocalDateTime.now();
 		setd(cTr,dtf.format(now));
 		cTr++;
+		}
+		}
+		catch(IllegalArgumentException e){
+			
 		}
 	}
 	

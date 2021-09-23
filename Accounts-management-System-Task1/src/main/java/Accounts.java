@@ -70,7 +70,16 @@ public abstract class Accounts {
 		// TODO Auto-generated constructor stub
 	}
 	
+	//Abstract
 	
+	public abstract void makeDeposit(int amt);
+	public abstract void withdraw(int amt);
+	
+	
+	
+	
+	
+	//
 	
 	/**
 	 * @param args
@@ -155,7 +164,7 @@ public abstract class Accounts {
 	//--------------------------Make Deposits-----------------------------------
 	//--------------------------------------------------------------------------
 	
-	public abstract void makeDeposit(int amt);
+	//public abstract void makeDeposit(int amt);
 	//--------------------------------------------------------------------------
 	//--------------------------------WithDraw----------------------------------
 	//--------------------------------------------------------------------------
@@ -291,7 +300,10 @@ public abstract class Accounts {
 		{
 			System.out.println("Not a valid input. Please enter the amount in numbers");
 		}*/
-		
+		try {
+			if(am<0) {
+				throw new IllegalArgumentException();
+			}
 		
 		account_balance=account_balance-am;
 		int newB=k.getBalance()+am;
@@ -300,7 +312,10 @@ public abstract class Accounts {
 		LocalDateTime now = LocalDateTime.now();
 		System.out.println("An amount of Rs "+am+" was deposited into account "+k.getAccNum()+" owned by "+k.getName()+" on "+dtf.format(now));
 		k.setMsg("An amount of Rs "+am+" was deposited into your account by account number "+Acc_no+" owned by "+name+" on "+dtf.format(now));
-		
+		}
+		catch(IllegalArgumentException e){
+			
+		}
 	//logged=(Checking)a.get(index);	
 	}
 	

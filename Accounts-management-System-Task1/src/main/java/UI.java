@@ -246,8 +246,8 @@ public class UI {
 	//----------------------------------------------------------------
 	//----------------------Sign Up-----------------------------------
 	//--------------------Create Account------------------------------
-	public void SignUp() {			//Create Account Module
-		Scanner i5=new Scanner(System.in);
+	public void SignUp(String uniqueID,char AccT,String name) {			//Create Account Module
+		/*Scanner i5=new Scanner(System.in);
 		System.out.println("Please enter your name");
 		String name=i5.next();
 		Scanner i1=new Scanner(System.in);
@@ -264,11 +264,11 @@ public class UI {
 		         System.out.println("Enter Valid invalid");
 		         AccT=i1.next().charAt(0);
 		    }
-			}
+			}*/
 		/////////////////////////////////////////////////
 		
 		if(AccT=='X'||AccT=='x') {
-			String uniqueID = UUID.randomUUID().toString();
+			//String uniqueID = UUID.randomUUID().toString();
 			
 			a.add(new Checking(AccT,uniqueID,name));
 			
@@ -277,7 +277,7 @@ public class UI {
 			unique1++;
 		}
 		else if(AccT=='Y'||AccT=='y') {
-			String uniqueID = UUID.randomUUID().toString();
+			//String uniqueID = UUID.randomUUID().toString();
 			System.out.println(uniqueID);
 			s.add(new Saving(AccT,uniqueID,name));
 			System.out.println("Account successfully Created\n"+"Your Account ID is: "+uniqueID+"\n Remember this ID to Access your account and keep it secure\n");
@@ -825,11 +825,36 @@ public class UI {
 		    }
 			}
 		
-		if(option=='a'||option=='A')
-		interface1.SignUp();
+		if(option=='a'||option=='A') {
+		String uniqueID = UUID.randomUUID().toString();
+		//
+		Scanner i5=new Scanner(System.in);
+		System.out.println("Please enter your name");
+		String name=i5.next();
+		Scanner i6=new Scanner(System.in);
+		System.out.println("Select Account type");
+		System.out.println("Press X for Checking");
+		System.out.println("Press Y for Saving");
+		char AccT=i6.next().charAt(0);
+		///////////////////////////////////////////////////////
+		while(true) {
+			if (Character.toString(AccT).matches("^[x-yX-Y]*$")) {
+		         //System.out.println("valid input");
+		         break;
+		    }else{
+		         System.out.println("Enter Valid invalid");
+		         AccT=i6.next().charAt(0);
+		    }
+			}
+
+		
+		//
 		
 		
-		id++;
+		interface1.SignUp(uniqueID,AccT,name);
+		}
+		
+		//id++;
 		if(option=='b'||option=='B') {
 			interface1.Login();
 		}

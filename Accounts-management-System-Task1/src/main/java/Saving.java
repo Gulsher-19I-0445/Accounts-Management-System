@@ -24,6 +24,10 @@ public class Saving extends Accounts {
 	//-----------------WithDraw-------------------------------
 	
 	public void withdraw(int amt) {
+		try {
+			if(amt<0) {
+				throw new IllegalArgumentException();
+			}
 		int temp=0;
 		temp=getBalance()-amt;
 		if(temp<0) {
@@ -40,6 +44,10 @@ public class Saving extends Accounts {
 		LocalDateTime now = LocalDateTime.now();
 		setd(cTr,dtf.format(now));
 		cTr++;
+		}
+		}
+		catch(IllegalArgumentException e){
+			
 		}
 	}
 	public void ZakatCalc() {
