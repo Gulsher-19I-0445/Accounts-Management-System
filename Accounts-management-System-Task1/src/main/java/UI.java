@@ -90,11 +90,11 @@ public class UI {
 					}
 					
 					b.makeDeposit(amt1);
-					if(b.free_count==0) {
+					if(b.getFree_count()==0) {
 						System.out.println("\nYour free monthly deposit has ended");
 						b.deduction();
 					}
-					b.free_count--;
+					b.setFree_count(b.getFree_count() - 1);
 					}
 				
 				if(opt=='B'||opt=='b') {
@@ -524,7 +524,7 @@ public class UI {
 	
 	//FIND Account Function
 	
-	public int findAcc(String to_find) {
+/*	public int findAcc(String to_find) {
 		//---------------------------
 		int check=2;		//1 for checKing and 2 for saving
 		String num=to_find;		//Account number
@@ -572,7 +572,7 @@ public class UI {
 
 		
 		return index;
-		}
+		}*/
 		//catch(IndexOutOfBoundsException Exception){
 			//System.out.println("Account does not exist");
 			//return -1;
@@ -672,31 +672,17 @@ public class UI {
 		if(pass.equals(p_word)) {
 			adminMenu();
 		}
+		else {
+			System.out.println("Wrong Password");
+		}
 	}
 	
 	//----------------------------------------------------------------
-	public void deleteAcc() {
+	public void deleteAcc(char AccT,String num) {
 		int ind=-1;
-		Scanner i1=new Scanner(System.in);
-		System.out.println("Select your Account Type");
-		System.out.println("Press X for Checking Account");
-		System.out.println("Press Y for Saving Account");
-		char AccT=i1.next().charAt(0);
 		Checking acc1=null;
 		Saving acc2=null;
-		while(true) {
-		if (Character.toString(AccT).matches("^[x-yX-Y]*$")) {
-	         //System.out.println("valid input");
-	         break;
-	    }else{
-	         System.out.println("Enter Valid invalid");
-	         AccT=i1.next().charAt(0);
-	    }
-		}
-		//-----------------
-		System.out.println("Enter the account number of the account you want to delete");
-		Scanner i5=new Scanner(System.in);
-		String num=i5.next();
+
 		//-----------------
 		
 		if(AccT=='X'||AccT=='x') {
@@ -777,7 +763,26 @@ public class UI {
 		}
 		
 		if(opt=='a'||opt=='A') {
-			deleteAcc();
+			Scanner i12=new Scanner(System.in);
+			System.out.println("Select your Account Type");
+			System.out.println("Press X for Checking Account");
+			System.out.println("Press Y for Saving Account");
+			char AccT=i12.next().charAt(0);
+
+			while(true) {
+			if (Character.toString(AccT).matches("^[x-yX-Y]*$")) {
+		         //System.out.println("valid input");
+		         break;
+		    }else{
+		         System.out.println("Enter Valid invalid");
+		         AccT=i12.next().charAt(0);
+		    }
+			}
+			//-----------------
+			System.out.println("Enter the account number of the account you want to delete");
+			Scanner i5=new Scanner(System.in);
+			String num=i5.next();
+			deleteAcc(AccT,num);
 		}
 		
 		if(opt=='b'||opt=='B') {
@@ -852,6 +857,7 @@ public class UI {
 		
 		
 		interface1.SignUp(uniqueID,AccT,name);
+		
 		}
 		
 		//id++;
@@ -865,7 +871,7 @@ public class UI {
 			Scanner i5=new Scanner(System.in);
 			String num=i5.next();
 			
-			interface1.adminMenu();
+			interface1.admin(num);
 		}
 		
 		// TODO Auto-generated method stub

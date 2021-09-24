@@ -3,9 +3,9 @@ import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 public class Checking extends Accounts {
-	int free_count;
-	int fee;
-	int cTr;
+	private int free_count;
+	private int fee;
+	private int cTr;
 
 	public Checking() {
 		free_count=2;
@@ -15,22 +15,52 @@ public class Checking extends Accounts {
 
 	public Checking(char A, String num,String name) {
 		super(A, num,name);
-		free_count=2;
-		fee=10;
-		cTr=0;
+		setFree_count(2);
+		setFee(10);
+		setcTr(0);
 		// TODO Auto-generated constructor stub
 	}
 	//-----------------------------------------------------------------
-	public Checking(char A, String num,String name,int b,String date) {
+	/*public Checking(char A, String num,String name,int b,String date) {
 		super(A, num,name,b,date);
 		free_count=2;
 		fee=10;
 		// TODO Auto-generated constructor stub
+	}*/
+	
+	
+	
+	
+	
+	
+	public int getFree_count() {
+		return free_count;
 	}
+
+	public void setFree_count(int free_count) {
+		this.free_count = free_count;
+	}
+
+	public int getFee() {
+		return fee;
+	}
+
+	public void setFee(int fee) {
+		this.fee = fee;
+	}
+
+	public int getcTr() {
+		return cTr;
+	}
+
+	public void setcTr(int cTr) {
+		this.cTr = cTr;
+	}
+
 	
 	//-----------------------------------------------------------------
-	//-------------------Withdraw Checking-----------------------------
-	//-----------------------------------------------------------------
+		//-------------------Withdraw Checking-----------------------------
+		//-----------------------------------------------------------------
 	
 	public void withdraw(int amt) {
 		try {
@@ -61,6 +91,7 @@ public class Checking extends Accounts {
 	
 	public void makeDeposit(int amt) {
 		//int amt=-1;
+		if(amt>=0) {
 		int x=0;
 		setBalance(getBalance()+amt);
 		System.out.print("Rs"+amt+" added to your balance");
@@ -70,7 +101,7 @@ public class Checking extends Accounts {
 		LocalDateTime now = LocalDateTime.now();
 		setd(getCount(),dtf.format(now));
 		setCount(getCount()+1);
-		
+		}
 		
 	}
 	

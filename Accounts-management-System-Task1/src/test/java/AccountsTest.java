@@ -75,6 +75,8 @@ public class AccountsTest {
 	//	fail("Not yet implemented");
 	}
 	*/
+	
+	//TESTING DEPOSITS
 	public void testDeposit() throws FileNotFoundException, IOException {
 		setUp();
 		int expected_value=112;
@@ -84,6 +86,43 @@ public class AccountsTest {
 		Assert.assertEquals(output, expected_value);
 	//	fail("Not yet implemented");
 	}
+	@Test
+	public void testDepositSaving() throws FileNotFoundException, IOException {
+		setUpS();
+		int expected_value=1100;
+		s1.makeDeposit(1000);
+		int output=s1.getBalance();
+		//int expected_value=100;
+		Assert.assertEquals(output, expected_value);
+	//	fail("Not yet implemented");
+	}
+	
+	//NEGS
+	@Test
+	public void testDeposit_Neg1() throws FileNotFoundException, IOException {
+		setUp();
+		int expected_value=100;
+		c1.makeDeposit(-12);
+		int output=c1.getBalance();
+		//int expected_value=100;
+		Assert.assertEquals(output, expected_value);
+	//	fail("Not yet implemented");
+	}
+	
+	@Test
+	public void testDepositSaving_Neg2() throws FileNotFoundException, IOException {
+		setUpS();
+		int expected_value=100;
+		s1.makeDeposit(-15);
+		int output=s1.getBalance();
+		//int expected_value=100;
+		Assert.assertEquals(output, expected_value);
+	//	fail("Not yet implemented");
+	}
+	
+	
+	
+	
 	@Test//(expected=IllegalArgumentException.class)
 	
 	//Transfer to Checking Account
@@ -129,6 +168,7 @@ public class AccountsTest {
 	}
 	
 	//Transfer to Saving Account
+	@Test
 	public void testTransferC1() throws FileNotFoundException, IOException {
 		setUpTransfer2();
 		int expected_value=200;
@@ -212,8 +252,10 @@ public class AccountsTest {
 	//	fail("Not yet implemented");
 	}
 	
+	
+	//TESTS FOR WITHDRAW
 	@Test
-	public void withDrawTestC() throws FileNotFoundException, IOException {
+	public void withDrawTestS() throws FileNotFoundException, IOException {
 		setUpS();
 		int expected_value1=100;
 		int expected_value2=10;
@@ -229,7 +271,102 @@ public class AccountsTest {
 	//	fail("Not yet implemented");
 	}
 	
-
+	@Test
+	public void withDrawTestS_WithdrawIMIT() throws FileNotFoundException, IOException {
+		setUpS();
+		int expected_value1=100;
+		int expected_value2=10;
+		s1.withdraw(101);
+		int output=s1.getBalance();
+		//int expected_value=100;
+		Assert.assertEquals(output, expected_value1);
+		s1.withdraw(90);
+		output=s1.getBalance();
+		Assert.assertEquals(output, expected_value2);
+		
+		
+	//	fail("Not yet implemented");
+	}
+	
+	
+	@Test
+	public void withDrawTestC() throws FileNotFoundException, IOException {
+		setUp();
+		int expected_value1=100;
+		int expected_value2=10;
+		c1.withdraw(-90);
+		int output=c1.getBalance();
+		//int expected_value=100;
+		Assert.assertEquals(output, expected_value1);
+		c1.withdraw(90);
+		output=c1.getBalance();
+		Assert.assertEquals(output, expected_value2);
+		
+		
+	//	fail("Not yet implemented");
+	}
+	
+	@Test
+	public void withDrawTestC_WithdrawLIMIT() throws FileNotFoundException, IOException {
+		setUp();
+		int expected_value1=100;
+		int expected_value2=10;
+		c1.withdraw(6000);
+		int output=c1.getBalance();
+		//int expected_value=100;
+		Assert.assertEquals(output, expected_value1);
+		c1.withdraw(90);
+		output=c1.getBalance();
+		Assert.assertEquals(output, expected_value2);
+		
+		
+	//	fail("Not yet implemented");
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	//TESTING CHECK BALANCE
+	@Test
+	public void ViewBalance() throws FileNotFoundException, IOException {
+		setUpTransfer1();	//Using this function to make 2 accounts and check their balance
+		int expected_value1=100;
+		int expected_value2=150;
+		//s1.withdraw(-90);
+		int output=c1.checkBalance();
+		Assert.assertEquals(output, expected_value1);
+		c1.makeDeposit(50);
+		int output2=c1.checkBalance();
+		Assert.assertEquals(output2, expected_value2);
+		
+		
+	//	fail("Not yet implemented");
+	}
+	
+	//ZAKAT
+	@Test
+	public void Zakat() throws FileNotFoundException, IOException {
+		setUpS();							//For customer with zakat not applied
+		double expected_value1=0;
+		double output1=s1.ZakatCalc();	
+		Assert.assertEquals(output1, expected_value1,0.01);
+	}
+	@Test
+	public void Zakat2() throws FileNotFoundException, IOException {
+		setUpS();
+		double expected_value1=1252.5;		//For customer with zakat applied
+		s1.makeDeposit(50000);
+		double output1=s1.ZakatCalc();
+		Assert.assertEquals(output1, expected_value1,0.01);
+	}
+	
+	
 	
 	
 	public void test() {

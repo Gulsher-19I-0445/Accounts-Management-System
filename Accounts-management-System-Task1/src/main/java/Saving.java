@@ -1,6 +1,5 @@
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Scanner;
 
 public class Saving extends Accounts {
 	private int cTr;
@@ -14,15 +13,23 @@ public class Saving extends Accounts {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public Saving(char A, String num,String name,int b,String date) {
+	/*public Saving(char A, String num,String name,int b,String date) {
 		super(A, num,name,b,date);
 		cTr=0;
 		// TODO Auto-generated constructor stub
-	}
+	}*/
 	
 	//--------------------------------------------------------
 	//-----------------WithDraw-------------------------------
 	
+	public double getZakat() {
+		return zakat;
+	}
+
+	public void setZakat(double zakat) {
+		this.zakat = zakat;
+	}
+
 	public void withdraw(int amt) {
 		try {
 			if(amt<0) {
@@ -50,18 +57,23 @@ public class Saving extends Accounts {
 			
 		}
 	}
-	public void ZakatCalc() {
+	public double ZakatCalc() {
 		if(getBalance()>20000) {
 			zakat=(getBalance()*2.5)/100;
 			System.out.println("Rs "+zakat+" will be deducted from your account");
+			return getZakat();
 		}
 		else{
 			System.out.println("Zakat is not applicable on your Account");
+			setZakat(0);
+			return 0;
 		}
+		
 	}
 	
 	public void makeDeposit(int amt) {
 		//int amt=-1;
+		if(amt>=0) {
 		int x=0;
 		setBalance(getBalance()+amt);
 		System.out.print("Rs"+amt+" added to your balance");
@@ -72,7 +84,7 @@ public class Saving extends Accounts {
 		setd(getCount(),dtf.format(now));
 		setCount(getCount()+1);
 		
-		
+		}
 	}
 	
 

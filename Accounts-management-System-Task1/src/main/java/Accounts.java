@@ -58,7 +58,7 @@ public abstract class Accounts {
 		// TODO Auto-generated constructor stub
 	}
 	//--------------------------------------------------------------------
-	public Accounts(char A,String num,String name1,int balance,String date) {
+	/*public Accounts(char A,String num,String name1,int balance,String date) {
 		Acc_no=num;
 		account_balance=balance;
 		//DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");  
@@ -68,7 +68,7 @@ public abstract class Accounts {
 		//System.out.println("Account created on "+dtf.format(now));
 		date_created=date;
 		// TODO Auto-generated constructor stub
-	}
+	}*/
 	
 	//Abstract
 	
@@ -154,11 +154,12 @@ public abstract class Accounts {
 	//--------------------------------------------------------------------------
 	//----------------------------CHECK----------------------------------
 	//--------------------------------------------------------------------------
-	public void checkBalance() {
+	public int checkBalance() {
 		//System.out.println("Your assigned Account Number and Account type is: ");
 		System.out.println("Account ID: "+Acc_no);
 		System.out.println("Your account balance is: ");
 		System.out.println(account_balance);
+		return getBalance();
 	}
 	//--------------------------------------------------------------------------
 	//--------------------------Make Deposits-----------------------------------
@@ -168,7 +169,7 @@ public abstract class Accounts {
 	//--------------------------------------------------------------------------
 	//--------------------------------WithDraw----------------------------------
 	//--------------------------------------------------------------------------
-	public void write_to() 
+	/*public void write_to() 
 		throws IOException {
 		/*BufferedWriter br = new BufferedWriter(new FileWriter("text1.csv"));
 		StringBuilder sb = new StringBuilder();
@@ -181,7 +182,7 @@ public abstract class Accounts {
 		
 		  
 		br.write(sb.toString());
-		br.close();*/
+		br.close();*
 	
 		String temp="";
 		//Date dt1;
@@ -213,7 +214,7 @@ public abstract class Accounts {
 		csvWriter.close();	  
 		  
 		
-	}
+	}*/
 	public void PrintStatemet() {
 		String temp=" ";
 		System.out.println("Generating statement for"+Acc_no);
