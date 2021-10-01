@@ -30,7 +30,7 @@ public class Saving extends Accounts {
 		this.zakat = zakat;
 	}
 
-	public void withdraw(int amt) {
+	public void withdraw(int amt) throws InsufficientBalanceException {
 		try {
 			if(amt<0) {
 				throw new IllegalArgumentException();
@@ -38,7 +38,7 @@ public class Saving extends Accounts {
 		int temp=0;
 		temp=getBalance()-amt;
 		if(temp<0) {
-			System.out.println("You are exceeding your current balance limits for you Saving Account. WithDrawal failed. Current Balance: Rs"+getBalance());
+			throw new InsufficientBalanceException("You are exceeding your current balance limits for you Saving Account. WithDrawal failed. Current Balance: Rs"+getBalance());
 		}
 		else {
 			setBalance(getBalance()-amt);
@@ -87,10 +87,19 @@ public class Saving extends Accounts {
 		}
 	}
 	
+	@Override
+	public String toString() {
+        return new StringBuffer(" Name: ").append(this.getName())
+                .append(" Account Number : ").append(this.getAccNum()).append(" Current Balance : ").append(this.getBalance()).append("Account Type: Saving").append(" Account Created on : ").append(this.getDate()).toString();
+    }
+	
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
 	}
+
+	//@Override
+
 
 }

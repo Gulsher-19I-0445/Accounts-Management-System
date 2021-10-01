@@ -73,9 +73,9 @@ public abstract class Accounts {
 	//Abstract
 	
 	public abstract void makeDeposit(int amt);
-	public abstract void withdraw(int amt);
+	public abstract void withdraw(int amt) throws InsufficientBalanceException;
 	
-	
+	//
 	
 	
 	
@@ -332,6 +332,7 @@ public abstract class Accounts {
 		// TODO Auto-generated method stub
 
 	//}
+
 
 }
 

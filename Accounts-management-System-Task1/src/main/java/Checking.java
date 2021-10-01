@@ -1,6 +1,7 @@
+import java.io.FileOutputStream;
+import java.io.ObjectOutputStream;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Scanner;
 
 public class Checking extends Accounts {
 	private int free_count;
@@ -56,6 +57,26 @@ public class Checking extends Accounts {
 	public void setcTr(int cTr) {
 		this.cTr = cTr;
 	}
+	
+
+	
+	/*public void serializeAddressJDK7() {
+
+		try (ObjectOutputStream oos = 
+				new ObjectOutputStream(new FileOutputStream("c:\\temp\\address2.ser"))) {
+
+			oos.writeObject(address);
+			System.out.println("Done");
+
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+
+	}*/
+	
+	
+	
+	
 
 	
 	//-----------------------------------------------------------------
@@ -105,7 +126,11 @@ public class Checking extends Accounts {
 		
 	}
 	
-	
+	@Override
+	public String toString() {
+        return new StringBuffer("Name: ").append(this.getName())
+                .append("| Account Number : ").append(this.getAccNum()).append("| Current Balance : ").append(this.getBalance()).append("| Account Type: Checking").append("| Account Created on : ").append(this.getDate()).toString();
+    }
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub

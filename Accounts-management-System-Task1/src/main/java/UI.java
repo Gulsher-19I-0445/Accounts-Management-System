@@ -1,7 +1,7 @@
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.UUID;
 
@@ -17,7 +17,7 @@ public class UI {
 	int unique2;
 	private String p_word;
 	
-	
+	//FileWriter mywriter;
 	
 	
 	//----------------------------------------------------------------
@@ -28,16 +28,19 @@ public class UI {
 		unique1=0;
 		unique2=0;
 		p_word="1234";
-
+		
 		// TODO Auto-generated constructor stub
 	}
 	
+	//public void writeObjecttofile() {
+		
+	//}
 
 	
 	//----------------------------------------------------------------
 		//-----------------------Accounts Detail--------------------------
 		//----------------------------------------------------------------
-		public void Operations(int i,char atyp) {
+		public void Operations(int i,char atyp) throws InsufficientBalanceException, IOException {
 			//Checking b=;
 			int c1=0;
 			//Checking b=(Checking)a.get(i);
@@ -64,6 +67,7 @@ public class UI {
 				while(true) {
 					if (Character.toString(opt).matches("^[a-eA-E0]*$")) {
 				         //System.out.println("valid input");
+						
 				         break;
 				    }else{
 				         System.out.println("Enter Valid invalid");
@@ -123,6 +127,15 @@ public class UI {
 				if(opt=='E'||opt=='e') {
 					TransferTo(b);
 					}
+				if(opt=='0') {
+					
+					FileWriter mywriter=new FileWriter("Accounts.txt",true);
+					
+					mywriter.write(b.toString());
+					mywriter.write("\n");
+					mywriter.close();
+					//b.serializeChecking();
+				}
 				
 			}
 			//-----------------------------
@@ -204,7 +217,12 @@ public class UI {
 						i1=new Scanner(System.in);
 						am=i1.nextInt();
 						}
+					try {
 					c.withdraw(am);
+					}
+					catch(InsufficientBalanceException e) {
+						System.out.printf("Insufficient Balance");
+					}
 				}
 				
 				if(opt=='C'||opt=='c') {
@@ -246,7 +264,7 @@ public class UI {
 	//----------------------------------------------------------------
 	//----------------------Sign Up-----------------------------------
 	//--------------------Create Account------------------------------
-	public void SignUp(String uniqueID,char AccT,String name) {			//Create Account Module
+	public void SignUp(String uniqueID,char AccT,String name) throws InsufficientBalanceException {			//Create Account Module
 		/*Scanner i5=new Scanner(System.in);
 		System.out.println("Please enter your name");
 		String name=i5.next();
@@ -273,7 +291,12 @@ public class UI {
 			a.add(new Checking(AccT,uniqueID,name));
 			
 			System.out.println("Account successfully Created\n"+"Your Account ID is: "+uniqueID+"\n Remember this ID to Access your account and keep it secure\n");
-			Operations(unique1,AccT);
+			try {
+				Operations(unique1,AccT);
+			} catch (InsufficientBalanceException | IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			unique1++;
 		}
 		else if(AccT=='Y'||AccT=='y') {
@@ -281,7 +304,12 @@ public class UI {
 			System.out.println(uniqueID);
 			s.add(new Saving(AccT,uniqueID,name));
 			System.out.println("Account successfully Created\n"+"Your Account ID is: "+uniqueID+"\n Remember this ID to Access your account and keep it secure\n");
-			Operations(unique2,AccT);
+			try {
+				Operations(unique2,AccT);
+			} catch (InsufficientBalanceException | IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			unique2++;
 		}
 		
@@ -291,7 +319,7 @@ public class UI {
 	//--------------------------------------------------------------------------------------------------------------------------------
 	//---------------------------------				LOGIN				--------------------------------------------------------------
 	//--------------------------------------------------------------------------------------------------------------------------------
-	public void Login() {
+	public void Login() throws InsufficientBalanceException {
 		int index=-1;
 		Scanner i1=new Scanner(System.in);
 		System.out.println("Select your Account Type");
@@ -323,7 +351,15 @@ public class UI {
 		}
 		//else {
 		try {
-		Operations(index,AccT);
+		try {
+			Operations(index,AccT);
+		} catch (InsufficientBalanceException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		}
 		catch(IndexOutOfBoundsException Exception) {
 			System.out.println("Enter an existing account");
@@ -803,7 +839,7 @@ public class UI {
 	//----------------------Int Main----------------------------------
 	//----------------------------------------------------------------
 	
-	public static void main(String[] args) throws FileNotFoundException, IOException {
+	public static void main(String[] args) throws FileNotFoundException, IOException, InsufficientBalanceException {
 		//------------------------------------------------------------
 
 		UI interface1=new UI();
@@ -876,6 +912,7 @@ public class UI {
 		
 		// TODO Auto-generated method stub
 		}
+		//interface1.mywriter.close();
 	}
 
 }

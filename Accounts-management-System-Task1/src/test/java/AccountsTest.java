@@ -4,7 +4,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import org.junit.Assert;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class AccountsTest {
@@ -254,15 +253,22 @@ public class AccountsTest {
 	
 	
 	//TESTS FOR WITHDRAW
-	@Test
-	public void withDrawTestS() throws FileNotFoundException, IOException {
+	@Test//(expected= InsufficientBalanceException.class)
+	public void withDrawTestS() throws FileNotFoundException, IOException, InsufficientBalanceException {
 		setUpS();
+		int output=0;
 		int expected_value1=100;
 		int expected_value2=10;
-		s1.withdraw(-90);
-		int output=s1.getBalance();
-		//int expected_value=100;
-		Assert.assertEquals(output, expected_value1);
+		try {
+			s1.withdraw(-90);
+			output=s1.getBalance();
+			//int expected_value=100;
+			Assert.assertEquals(output, expected_value1);	
+		}
+		catch(InsufficientBalanceException e) {
+			
+		}
+		
 		s1.withdraw(90);
 		output=s1.getBalance();
 		Assert.assertEquals(output, expected_value2);
@@ -271,8 +277,8 @@ public class AccountsTest {
 	//	fail("Not yet implemented");
 	}
 	
-	@Test
-	public void withDrawTestS_WithdrawIMIT() throws FileNotFoundException, IOException {
+	@Test(expected= InsufficientBalanceException.class)
+	public void withDrawTestS_WithdrawIMIT() throws FileNotFoundException, IOException, InsufficientBalanceException {
 		setUpS();
 		int expected_value1=100;
 		int expected_value2=10;
