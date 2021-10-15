@@ -86,7 +86,7 @@ public class UI {
 					while(amt1<0) {
 					//if(x>0) {
 						//Scanner i1=new Scanner(System.in);
-						System.out.println("Please Enter a Valid ammount");
+						System.out.println("Plea se Enter a Valid ammount");
 						//x++;
 					//}
 					i10=new Scanner(System.in);
