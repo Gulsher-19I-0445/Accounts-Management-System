@@ -129,7 +129,7 @@ public class UITest {
 		
 		interface1.deleteAcc('y',AccNo);
 		int expected_value1=0;
-		int expected_value2=11;
+		int expected_value2=1;
 		Assert.assertEquals(interface1.findAccSaving(AccNo1), expected_value1);
 		Assert.assertEquals(interface1.findAccSaving(AccNo2), expected_value2);
 		//fail("Not yet implemented");
