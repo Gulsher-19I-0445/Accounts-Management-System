@@ -38,8 +38,8 @@ public abstract class Accounts {
 		LocalDateTime now = LocalDateTime.now();  
 		name=name1;
 		account_typ=A;
-		System.out.println("Account created date: "+dtf.format(now));
-		date_created=dtf.format(now);
+		System.out.println("Account created on date: "+dtf.format(now));
+		date_created=dtf.format(now); 
 		transactions=new int[10];
 		tdate=new String[10];
 		for(int i=0;i<10;i++) {
