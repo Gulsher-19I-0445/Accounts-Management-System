@@ -26,7 +26,7 @@ public class AccountsTest {
 	}
 	
 	public void setUpTransfer1() throws FileNotFoundException, IOException {	//Transfer to Checking
-		c1=new Checking('x',"126","name");
+		c1=new Checking('x',"123","name");
 		c2=new Checking('x',"456","name2");
 		//u=new UI();
 		
