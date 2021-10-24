@@ -284,7 +284,7 @@ public class AccountsTest {
 		int expected_value2=1;
 		s1.withdraw(101);
 		int output=s1.getBalance();
-		//int expected_value=100;
+		int expected_value=100;
 		Assert.assertEquals(output, expected_value1);
 		s1.withdraw(90);
 		output=s1.getBalance();
@@ -299,7 +299,7 @@ public class AccountsTest {
 	public void withDrawTestC() throws FileNotFoundException, IOException {
 		setUp();
 		int expected_value1=100;
-		int expected_value2=10;
+		int expected_value2=1000000;
 		c1.withdraw(-90);
 		int output=c1.getBalance();
 		//int expected_value=100;
