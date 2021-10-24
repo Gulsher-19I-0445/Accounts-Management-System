@@ -815,7 +815,7 @@ public class UI {
 		    }
 			}
 			//-----------------
-			System.out.println("Enter the account number of the account you want to delete");
+			System.out.println("Enter the account number of account you want to delete");
 			Scanner i5=new Scanner(System.in);
 			String num=i5.next();
 			deleteAcc(AccT,num);
