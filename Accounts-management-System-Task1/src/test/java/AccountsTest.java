@@ -26,7 +26,7 @@ public class AccountsTest {
 	}
 	
 	public void setUpTransfer1() throws FileNotFoundException, IOException {	//Transfer to Checking
-		c1=new Checking('x',"12345","name");
+		c1=new Checking('x',"123","name");
 		c2=new Checking('x',"456","name2");
 		//u=new UI();
 		
@@ -281,7 +281,7 @@ public class AccountsTest {
 	public void withDrawTestS_WithdrawIMIT() throws FileNotFoundException, IOException, InsufficientBalanceException {
 		setUpS();
 		int expected_value1=100;
-		int expected_value2=10;
+		int expected_value2=1;
 		s1.withdraw(101);
 		int output=s1.getBalance();
 		//int expected_value=100;
