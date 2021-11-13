@@ -14,33 +14,33 @@ public class AccountsTest {
 	//private UI u;
 	//@BeforeClass
 	public void setUp() throws FileNotFoundException, IOException {
-		c1=new Checking('x',"abd","name");
+		c1=new Checking('x',"abd","name", 0);
 		//u=new UI();
 		
 	}
 	
 	public void setUpS() throws FileNotFoundException, IOException {
-		s1=new Saving('y',"abd","name");
+		s1=new Saving('y',"abd","name", 0);
 		//u=new UI();
 		
 	}
 	
 	public void setUpTransfer1() throws FileNotFoundException, IOException {	//Transfer to Checking
-		c1=new Checking('x',"123","name");
-		c2=new Checking('x',"456","name2");
+		c1=new Checking('x',"123","name", 0);
+		c2=new Checking('x',"456","name2", 0);
 		//u=new UI();
 		
 	}
 	
 	public void setUpTransfer2() throws FileNotFoundException, IOException {	//Transfer to Saving
-		s1=new Saving('y',"789","name3");
-		s2=new Saving('Y',"111","name4");
+		s1=new Saving('y',"789","name3", 0);
+		s2=new Saving('Y',"111","name4", 0);
 		//u=new UI();
 		
 	}
 	public void setUpCrossTransfer() throws FileNotFoundException, IOException {	//Transfer to Saving
-		s1=new Saving('y',"789","name5");
-		c1=new Checking('x',"111","name6");
+		s1=new Saving('y',"789","name5", 0);
+		c1=new Checking('x',"111","name6", 0);
 		//u=new UI();
 		
 	}

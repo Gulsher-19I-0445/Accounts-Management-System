@@ -1,6 +1,7 @@
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.UUID;
@@ -40,7 +41,7 @@ public class UI {
 	//----------------------------------------------------------------
 		//-----------------------Accounts Detail--------------------------
 		//----------------------------------------------------------------
-		public void Operations(int i,char atyp) throws InsufficientBalanceException, IOException {
+		public void Operations(int i,char atyp) throws InsufficientBalanceException, IOException, SQLException, ClassNotFoundException {
 			//Checking b=;
 			int c1=0;
 			//Checking b=(Checking)a.get(i);
@@ -50,6 +51,15 @@ public class UI {
 			while(opt!='0') {
 			if(atyp=='X'||atyp=='x') {
 				Checking b=(Checking)a.get(i);
+				
+				
+				
+				System.out.println(b.db);
+				//Scanner MYd=new Scanner(System.in);
+				//char mydb=MYd.next().charAt(0);
+				//b.db=2;
+
+				
 				if(c1==0) {
 					System.out.println("Welcome "+b.getName());
 					c1++;
@@ -76,6 +86,8 @@ public class UI {
 					}
 				/////////////////////////////////////////////////////////
 				
+				
+				
 				if(opt=='A'||opt=='a') {
 					
 					int amt1=0;
@@ -99,6 +111,14 @@ public class UI {
 						b.deduction();
 					}
 					b.setFree_count(b.getFree_count() - 1);
+					if(b.db==1) {
+						OracleCon myDb =new OracleCon();
+						myDb.UpdateMyDbBalance(b.getBalance(),b.getAccNum());
+					}
+					else if(b.db==2) {
+						MySqlConn mySDb=new MySqlConn();
+						mySDb.UpdateMyDbBalance(b.getBalance(),b.getAccNum());
+					}
 					}
 				
 				if(opt=='B'||opt=='b') {
@@ -116,6 +136,14 @@ public class UI {
 						am=i2.nextInt();
 						}
 					b.withdraw(am);
+					if(b.db==1) {
+						OracleCon myDb =new OracleCon();
+						myDb.UpdateMyDbBalance(b.getBalance(),b.getAccNum());
+					}
+					else if(b.db==2) {
+						MySqlConn mySDb=new MySqlConn();
+						mySDb.UpdateMyDbBalance(b.getBalance(),b.getAccNum());
+					}
 				}
 				
 				if(opt=='C'||opt=='c') {
@@ -126,14 +154,22 @@ public class UI {
 					}
 				if(opt=='E'||opt=='e') {
 					TransferTo(b);
+					if(b.db==1) {
+						OracleCon myDb =new OracleCon();
+						myDb.UpdateMyDbBalance(b.getBalance(),b.getAccNum());
+					}
+					else if(b.db==2) {
+						MySqlConn mySDb=new MySqlConn();
+						mySDb.UpdateMyDbBalance(b.getBalance(),b.getAccNum());
+					}
 					}
 				if(opt=='0') {
 					
-					FileWriter mywriter=new FileWriter("Accounts.txt",true);
+					//FileWriter mywriter=new FileWriter("Accounts.txt",true);
 					
-					mywriter.write(b.toString());
-					mywriter.write("\n");
-					mywriter.close();
+					//mywriter.write(b.toString());
+					//mywriter.write("\n");
+					//mywriter.close();
 					//b.serializeChecking();
 				}
 				
@@ -152,7 +188,8 @@ public class UI {
 					//System.out.println("DOES NOT EXITS");
 				//}
 				
-				
+					//OracleCon myDb=new OracleCon();
+					//myDb.ToDataBase(c);
 				//
 				//Saving c=(Saving)s.get(i);
 				
@@ -200,7 +237,14 @@ public class UI {
 					}
 					
 					c.makeDeposit(amt1);
-					
+					if(c.db==1) {
+						OracleCon myDb =new OracleCon();
+						myDb.UpdateMyDbBalance(c.getBalance(),c.getAccNum());
+					}
+					else if(c.db==2) {
+						MySqlConn mySDb=new MySqlConn();
+						mySDb.UpdateMyDbBalance(c.getBalance(),c.getAccNum());
+					}
 					}
 				
 				if(opt=='B'||opt=='b') {
@@ -219,6 +263,14 @@ public class UI {
 						}
 					try {
 					c.withdraw(am);
+					if(c.db==1) {
+						OracleCon myDb =new OracleCon();
+						myDb.UpdateMyDbBalance(c.getBalance(),c.getAccNum());
+					}
+					else if(c.db==2) {
+						MySqlConn mySDb=new MySqlConn();
+						mySDb.UpdateMyDbBalance(c.getBalance(),c.getAccNum());
+					}
 					}
 					catch(InsufficientBalanceException e) {
 						System.out.printf("Insufficient Balance");
@@ -235,6 +287,15 @@ public class UI {
 				
 				if(opt=='E'||opt=='e') {
 					TransferTo(c);
+					if(c.db==1) {
+						OracleCon myDb =new OracleCon();
+						myDb.UpdateMyDbBalance(c.getBalance(),c.getAccNum());
+					}
+					else if(c.db==2) {
+						MySqlConn mySDb=new MySqlConn();
+						mySDb.UpdateMyDbBalance(c.getBalance(),c.getAccNum());
+					}
+					
 				}
 				
 				if(opt=='F'||opt=='f') {
@@ -264,7 +325,7 @@ public class UI {
 	//----------------------------------------------------------------
 	//----------------------Sign Up-----------------------------------
 	//--------------------Create Account------------------------------
-	public void SignUp(String uniqueID,char AccT,String name) throws InsufficientBalanceException {			//Create Account Module
+	public void SignUp(String uniqueID,char AccT,String name,int dbn) throws InsufficientBalanceException, SQLException {			//Create Account Module
 		/*Scanner i5=new Scanner(System.in);
 		System.out.println("Please enter your name");
 		String name=i5.next();
@@ -288,11 +349,32 @@ public class UI {
 		if(AccT=='X'||AccT=='x') {
 			//String uniqueID = UUID.randomUUID().toString();
 			
-			a.add(new Checking(AccT,uniqueID,name));
+			a.add(new Checking(AccT,uniqueID,name,dbn));
+			Checking hm=(Checking)a.get(unique1);
+			if(dbn==1) {
+				OracleCon myDb =new OracleCon();
+				myDb.ToDataBase(hm);
+			}
+			
+			else if(dbn==2) {
+				MySqlConn mySDb=new MySqlConn();
+				
+				mySDb.ToSDataBase(hm);
+			}
 			
 			System.out.println("Account successfully Created\n"+"Your Account ID is: "+uniqueID+"\n Remember this ID to Access your account and keep it secure\n");
 			try {
-				Operations(unique1,AccT);
+				
+				//hm.ToDataBase();
+				try {
+					Operations(unique1,AccT);
+				} catch (ClassNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			} catch (InsufficientBalanceException | IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -302,10 +384,32 @@ public class UI {
 		else if(AccT=='Y'||AccT=='y') {
 			//String uniqueID = UUID.randomUUID().toString();
 			System.out.println(uniqueID);
-			s.add(new Saving(AccT,uniqueID,name));
+			s.add(new Saving(AccT,uniqueID,name,dbn));
+			Saving hm=(Saving)s.get(unique2);
+			if(dbn==1) {
+				OracleCon myDb =new OracleCon();
+				myDb.ToDataBase(hm);
+			}
+			
+			else if(dbn==2) {
+				MySqlConn mySDb=new MySqlConn();
+				
+				mySDb.ToSDataBase(hm);
+			}
+			
 			System.out.println("Account successfully Created\n"+"Your Account ID is: "+uniqueID+"\n Remember this ID to Access your account and keep it secure\n");
 			try {
-				Operations(unique2,AccT);
+				
+				//hm.ToDataBase();
+				try {
+					Operations(unique2,AccT);
+				} catch (ClassNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			} catch (InsufficientBalanceException | IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -319,7 +423,7 @@ public class UI {
 	//--------------------------------------------------------------------------------------------------------------------------------
 	//---------------------------------				LOGIN				--------------------------------------------------------------
 	//--------------------------------------------------------------------------------------------------------------------------------
-	public void Login() throws InsufficientBalanceException {
+	public void Login() throws InsufficientBalanceException, SQLException {
 		int index=-1;
 		Scanner i1=new Scanner(System.in);
 		System.out.println("Select your Account Type");
@@ -352,7 +456,15 @@ public class UI {
 		//else {
 		try {
 		try {
-			Operations(index,AccT);
+			try {
+				Operations(index,AccT);
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		} catch (InsufficientBalanceException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -839,7 +951,7 @@ public class UI {
 	//----------------------Int Main----------------------------------
 	//----------------------------------------------------------------
 	
-	public static void main(String[] args) throws FileNotFoundException, IOException, InsufficientBalanceException {
+	public static void main(String[] args) throws FileNotFoundException, IOException, InsufficientBalanceException, SQLException {
 		//------------------------------------------------------------
 
 		UI interface1=new UI();
@@ -876,6 +988,10 @@ public class UI {
 		System.out.println("Select Account type");
 		System.out.println("Press X for Checking");
 		System.out.println("Press Y for Saving");
+		
+		
+		
+		
 		char AccT=i6.next().charAt(0);
 		///////////////////////////////////////////////////////
 		while(true) {
@@ -887,12 +1003,33 @@ public class UI {
 		         AccT=i6.next().charAt(0);
 		    }
 			}
+		//DATABASE
+		System.out.println("Select Database type");
+		System.out.println("Press X for Oracle");
+		System.out.println("Press Y for MySql");
+		char dbms=i6.next().charAt(0);
+		while(true) {
+			if (Character.toString(dbms).matches("^[x-yX-Y]*$")) {
+		         //System.out.println("valid input");
+		         break;
+		    }else{
+		         System.out.println("Enter Valid invalid");
+		         dbms=i6.next().charAt(0);
+		    }
+			}
+		int db=0;
+		if(dbms=='X') {
+			db=1;
+		}
+		else if(dbms=='Y') {
+			db=2;
+		}
 
 		
 		//
 		
 		
-		interface1.SignUp(uniqueID,AccT,name);
+		interface1.SignUp(uniqueID,AccT,name,db);
 		
 		}
 		

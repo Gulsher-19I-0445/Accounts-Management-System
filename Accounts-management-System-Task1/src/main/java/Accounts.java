@@ -1,5 +1,6 @@
 import java.io.FileWriter;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -21,6 +22,7 @@ public abstract class Accounts {
 	private String tdate[];
 	private int countT;
 	private String msg;
+	int db;
 
 	/**
 	 * 
@@ -31,7 +33,7 @@ public abstract class Accounts {
 		date_created="12";
 		// TODO Auto-generated constructor stub
 	}
-	public Accounts(char A,String num,String name1) {
+	public Accounts(char A,String num,String name1,int dbn) {
 		Acc_no=num;
 		account_balance=100;
 		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");  
@@ -49,6 +51,7 @@ public abstract class Accounts {
 			tdate[i]="";
 		}
 		countT=0;
+		db=dbn;
 		/*try {
 			write_to();
 		} catch (IOException e) {
@@ -274,6 +277,33 @@ public abstract class Accounts {
 		account_balance=account_balance-am;
 		int newB=k.getBalance()+am;
 		k.setBalance(newB);
+		
+		if(k.db==1) {
+			OracleCon myDb =new OracleCon();
+			try {
+				myDb.UpdateMyDbBalance(k.getBalance(),k.getAccNum());
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		else if(k.db==2) {
+			MySqlConn mySDb=new MySqlConn();
+			try {
+				mySDb.UpdateMyDbBalance(k.getBalance(),k.getAccNum());
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		
 		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");  
 		LocalDateTime now = LocalDateTime.now();
 		System.out.println("An amount of Rs "+am+" was deposited into account "+k.getAccNum()+" owned by "+k.getName()+" on "+dtf.format(now));
@@ -309,6 +339,33 @@ public abstract class Accounts {
 		account_balance=account_balance-am;
 		int newB=k.getBalance()+am;
 		k.setBalance(newB);
+		
+		if(k.db==1) {
+			OracleCon myDb =new OracleCon();
+			try {
+				myDb.UpdateMyDbBalance(k.getBalance(),k.getAccNum());
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		else if(k.db==2) {
+			MySqlConn mySDb=new MySqlConn();
+			try {
+				mySDb.UpdateMyDbBalance(k.getBalance(),k.getAccNum());
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+
+		
 		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");  
 		LocalDateTime now = LocalDateTime.now();
 		System.out.println("An amount of Rs "+am+" was deposited into account "+k.getAccNum()+" owned by "+k.getName()+" on "+dtf.format(now));

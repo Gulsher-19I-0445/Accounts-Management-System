@@ -1,6 +1,7 @@
 import java.io.ByteArrayInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.sql.SQLException;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -19,19 +20,20 @@ public class UITest {
 	 * @throws IOException 
 	 * @throws FileNotFoundException 
 	 * @throws InsufficientBalanceException 
+	 * @throws SQLException 
 	 * @throws java.lang.Exception
 	 */
 	//@Before
-	public void setUp() throws FileNotFoundException, IOException, InsufficientBalanceException{
+	public void setUp() throws FileNotFoundException, IOException, InsufficientBalanceException, SQLException{
 		interface1=new UI();
 		System.setIn(new ByteArrayInputStream("0".getBytes()));
-		interface1.SignUp("1", 'x', "Gulsher");
+		interface1.SignUp("1", 'x', "Gulsher", 0);
 		System.setIn(new ByteArrayInputStream("0".getBytes()));
-		interface1.SignUp("2", 'x', "Rafay");
+		interface1.SignUp("2", 'x', "Rafay", 0);
 		System.setIn(new ByteArrayInputStream("0".getBytes()));
-		interface1.SignUp("3", 'y', "Ameen");
+		interface1.SignUp("3", 'y', "Ameen", 0);
 		System.setIn(new ByteArrayInputStream("0".getBytes()));
-		interface1.SignUp("4", 'Y', "Uzair");
+		interface1.SignUp("4", 'Y', "Uzair", 0);
 	}
 	
 	
@@ -39,7 +41,7 @@ public class UITest {
 	//TESTS FOR FINDING ACCOUNTS
 	
 	@Test
-	public void findAccTestCheck() throws FileNotFoundException, IOException, InsufficientBalanceException {
+	public void findAccTestCheck() throws FileNotFoundException, IOException, InsufficientBalanceException, SQLException {
 		setUp();
 		String AccNo="1";
 		int output=interface1.findAccCheck(AccNo);
@@ -48,7 +50,7 @@ public class UITest {
 		//fail("Not yet implemented");
 	}
 	@Test
-	public void findAccTestSaving() throws FileNotFoundException, IOException, InsufficientBalanceException {
+	public void findAccTestSaving() throws FileNotFoundException, IOException, InsufficientBalanceException, SQLException {
 		setUp();
 		String AccNo="3";
 		int output=interface1.findAccSaving(AccNo);	//Finding a saving account
@@ -58,7 +60,7 @@ public class UITest {
 	}
 	
 	@Test
-	public void findAccTestChecking_Neg1() throws FileNotFoundException, IOException, InsufficientBalanceException {
+	public void findAccTestChecking_Neg1() throws FileNotFoundException, IOException, InsufficientBalanceException, SQLException {
 		setUp();
 		String AccNo="1";
 		int output=interface1.findAccSaving(AccNo);	//Finding a Checking account in array list for Saving should return False
@@ -68,7 +70,7 @@ public class UITest {
 	}
 	
 	@Test
-	public void findAccTestChecking_Neg2() throws FileNotFoundException, IOException, InsufficientBalanceException {
+	public void findAccTestChecking_Neg2() throws FileNotFoundException, IOException, InsufficientBalanceException, SQLException {
 		setUp();
 		String AccNo="12";
 		int output=interface1.findAccCheck(AccNo);	//Finding an Account that does not exist in Checking array list
@@ -78,7 +80,7 @@ public class UITest {
 	}
 	
 	@Test
-	public void findAccTestSaving_Neg1() throws FileNotFoundException, IOException, InsufficientBalanceException {
+	public void findAccTestSaving_Neg1() throws FileNotFoundException, IOException, InsufficientBalanceException, SQLException {
 		setUp();
 		String AccNo="3";
 		int output=interface1.findAccCheck(AccNo);	//Finding a Saving account in array list for Checking should return False
@@ -88,7 +90,7 @@ public class UITest {
 	}
 	
 	@Test
-	public void findAccTestSaving_Neg2() throws FileNotFoundException, IOException, InsufficientBalanceException {
+	public void findAccTestSaving_Neg2() throws FileNotFoundException, IOException, InsufficientBalanceException, SQLException {
 		setUp();
 		String AccNo="100";
 		int output=interface1.findAccSaving(AccNo);	//Finding an Account that does not exist in Savings array list
@@ -100,7 +102,7 @@ public class UITest {
 	
 	//TESTS FOR DELETE ACCOUNTS
 	@Test
-	public void DeleteAccTestChecking() throws FileNotFoundException, IOException, InsufficientBalanceException {
+	public void DeleteAccTestChecking() throws FileNotFoundException, IOException, InsufficientBalanceException, SQLException {
 		setUp();
 		String AccNo="1";
 		interface1.deleteAcc('x',AccNo);
@@ -110,7 +112,7 @@ public class UITest {
 	}
 	
 	@Test
-	public void DeleteAccTestSaving() throws FileNotFoundException, IOException, InsufficientBalanceException {
+	public void DeleteAccTestSaving() throws FileNotFoundException, IOException, InsufficientBalanceException, SQLException {
 		setUp();
 		String AccNo="3";
 		interface1.deleteAcc('y',AccNo);
@@ -120,7 +122,7 @@ public class UITest {
 	}
 	
 	@Test
-	public void DeleteAccTestSaving_Neg() throws FileNotFoundException, IOException, InsufficientBalanceException {
+	public void DeleteAccTestSaving_Neg() throws FileNotFoundException, IOException, InsufficientBalanceException, SQLException {
 		setUp();
 		String AccNo="30";
 		
@@ -136,7 +138,7 @@ public class UITest {
 	}
 	
 	@Test
-	public void DeleteAccTestChecking_Neg() throws FileNotFoundException, IOException, InsufficientBalanceException {
+	public void DeleteAccTestChecking_Neg() throws FileNotFoundException, IOException, InsufficientBalanceException, SQLException {
 		setUp();
 		String AccNo="30";
 		

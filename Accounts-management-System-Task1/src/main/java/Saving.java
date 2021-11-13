@@ -1,3 +1,7 @@
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -8,8 +12,8 @@ public class Saving extends Accounts {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Saving(char A, String num,String name) {
-		super(A, num,name);
+	public Saving(char A, String num,String name,int dbn) {
+		super(A, num,name,dbn);
 		// TODO Auto-generated constructor stub
 	}
 	
@@ -84,6 +88,38 @@ public class Saving extends Accounts {
 		setd(getCount(),dtf.format(now));
 		setCount(getCount()+1);
 		
+		}
+	}
+	
+	
+	public void ToDataBase() {
+		try {
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+			System.out.println("Driver successfully loaded");
+			
+			Connection con=DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe","system","1234");
+			System.out.println("Connection Established");
+			
+			String sql="INSERT INTO accounts(Acc_id,Name,Balance,Acc_typ,dt_created) VALUES (?,?,?,?,?)";
+			PreparedStatement statement=con.prepareStatement(sql);
+			statement.setString(1,this.getAccNum());
+			statement.setString(2,this.getName());
+			statement.setInt(3, this.getBalance());
+			statement.setString(4, "Saving");
+			statement.setString(5, this.getDate());
+			statement.executeUpdate();
+			//int i=statement.executeUpdate();
+			//con.commit();
+			//con.close();
+			
+			
+		}
+		catch(ClassNotFoundException e) {
+			System.out.println("Driver not loaded");
+		}
+		
+		catch(SQLException e) {
+			System.out.println("Connection Failed");
 		}
 	}
 	
